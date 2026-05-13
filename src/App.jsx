@@ -370,7 +370,68 @@ function NicheBrowser() {
     </section>
   );
 }
+function WhoItsFor() {
+  const groups = [
+    {
+      title: "Content Creators",
+      text: "Find affiliate programs that match your niche, content style, and audience trust.",
+      icon: Users,
+    },
+    {
+      title: "Influencers",
+      text: "Scout brands and products your followers already care about.",
+      icon: Star,
+    },
+    {
+      title: "Bloggers & Publishers",
+      text: "Compare affiliate offers that fit your articles, reviews, guides, and newsletters.",
+      icon: Globe2,
+    },
+    {
+      title: "Small Businesses",
+      text: "Discover partner programs that can add new revenue streams to your website or audience.",
+      icon: Building2,
+    },
+    {
+      title: "Agencies",
+      text: "Build affiliate partner lists for clients across multiple niches and campaigns.",
+      icon: TrendingUp,
+    },
+    {
+      title: "Affiliate Managers",
+      text: "Understand how creators search for programs and position your offer to get discovered.",
+      icon: ShieldCheck,
+    },
+  ];
 
+  return (
+    <section className="bg-white py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-black uppercase tracking-widest text-slate-500">Who it is for</p>
+          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
+            Built for anyone scouting better affiliate opportunities.
+          </h2>
+          <p className="mt-4 text-slate-600">
+            PartnerScout helps people turn their audience, content, website, or client work into smarter partnership opportunities.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {groups.map((group) => (
+            <div key={group.title} className="rounded-[2rem] border bg-slate-50 p-6 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm">
+                <group.icon className="h-6 w-6 text-slate-700" />
+              </div>
+              <h3 className="mt-5 text-xl font-black text-slate-950">{group.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">{group.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 function HowItWorks() {
   const steps = [
     { icon: Search, title: "Search your niche", text: "Scout Programs by industry, product type, audience, commission model, or brand name." },
@@ -504,6 +565,7 @@ export default function AffiliatePartnerDirectory() {
       <Stats />
       <Directory />
       <NicheBrowser />
+      <WhoItsFor />
       <HowItWorks />
       <ForBrands />
       <Pricing />
