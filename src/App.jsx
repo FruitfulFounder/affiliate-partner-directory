@@ -134,7 +134,7 @@ function Header() {
         </div>
 
         <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-700 md:flex">
-          <a href="#directory" className="hover:text-slate-950">Find Programs</a>
+          <a href="#directory" className="hover:text-slate-950">Scout Programs</a>
           <a href="#niches" className="hover:text-slate-950">Niches</a>
           <a href="#brands" className="hover:text-slate-950">For Brands</a>
           <a href="#pricing" className="hover:text-slate-950">Pricing</a>
@@ -152,7 +152,7 @@ function Header() {
       {open && (
         <div className="border-t bg-white px-4 py-4 md:hidden">
           <div className="grid gap-3 text-sm font-semibold text-slate-700">
-            <a href="#directory">Find Programs</a>
+            <a href="#directory">Scout Programs</a>
             <a href="#niches">Niches</a>
             <a href="#brands">For Brands</a>
             <a href="#pricing">Pricing</a>
@@ -172,13 +172,13 @@ function Hero() {
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
             <Sparkles className="h-4 w-4" />
-            The affiliate marketplace for creators and businesses
+            The scouting engine for affiliate partnerships
           </div>
           <h1 className="max-w-4xl text-5xl font-black tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
-            Find affiliate partners that fit your audience.
+          Scout affiliate partners built for your audience
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            Search verified affiliate programs, compare commissions, discover brand partners by niche, and build new revenue streams without digging through scattered websites.
+          PartnerScout helps creators, publishers, and businesses discover affiliate programs by niche, commission type, audience fit, and growth potential.
           </p>
 
           <div className="mt-8 rounded-3xl border bg-white p-3 shadow-xl shadow-slate-200/70">
@@ -187,11 +187,11 @@ function Hero() {
                 <Search className="h-5 w-5 text-slate-500" />
                 <input
                   className="w-full bg-transparent text-base outline-none placeholder:text-slate-400"
-                  placeholder="Search by niche, product, brand, or commission type"
+                  placeholder="Scout by niche, product, brand, audience, or commission type"
                 />
               </div>
               <button className="min-h-14 rounded-2xl bg-slate-950 px-7 font-bold text-white hover:bg-slate-800">
-                Search partners
+              Start scouting
               </button>
             </div>
           </div>
@@ -276,8 +276,8 @@ function Directory() {
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="text-sm font-black uppercase tracking-widest text-slate-500">Affiliate directory</p>
-            <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Search programs by niche, payout, and audience fit.</h2>
-            <p className="mt-4 max-w-2xl text-slate-600">Built like a supplier directory, but designed for affiliate partnerships, creators, publishers, agencies, and businesses.</p>
+            <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Scout programs by niche, payout, and audience fit.</h2>
+            <p className="mt-4 max-w-2xl text-slate-600">Built like a sourcing directory, but designed to help creators and businesses scout affiliate partnerships that match their audience.</p>
           </div>
           <button className="inline-flex items-center justify-center gap-2 rounded-2xl border px-5 py-3 font-bold text-slate-800 hover:bg-slate-50">
             Advanced filters <Filter className="h-4 w-4" />
@@ -335,7 +335,7 @@ function Directory() {
                 {program.tags.map((tag) => <span key={tag} className="rounded-full border px-3 py-1 text-xs font-bold text-slate-600">{tag}</span>)}
               </div>
               <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 font-bold text-white hover:bg-slate-800">
-                View program <ArrowRight className="h-4 w-4" />
+              Scout this program <ArrowRight className="h-4 w-4" />
               </button>
             </motion.article>
           ))}
@@ -373,7 +373,7 @@ function NicheBrowser() {
 
 function HowItWorks() {
   const steps = [
-    { icon: Search, title: "Search your niche", text: "Find programs by industry, product type, audience, commission model, or brand name." },
+    { icon: Search, title: "Search your niche", text: "Scout Programs by industry, product type, audience, commission model, or brand name." },
     { icon: CheckCircle2, title: "Compare verified details", text: "Review payouts, cookie windows, approval rules, platforms, and creator requirements." },
     { icon: TrendingUp, title: "Apply and grow", text: "Build a shortlist, contact programs, and track your monetization opportunities." },
   ];
@@ -384,8 +384,8 @@ function HowItWorks() {
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <p className="text-sm font-black uppercase tracking-widest text-slate-500">How it works</p>
-            <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">A sourcing engine for affiliate revenue.</h2>
-            <p className="mt-4 text-slate-600">Thomasnet helps people source manufacturers. PartnerScout helps people source affiliate partners, brand programs, and monetization opportunities.</p>
+            <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">A scouting engine for affiliate growth.</h2>
+            <p className="mt-4 text-slate-600">PartnerScout helps creators and businesses scout affiliate programs, compare partner opportunities, and turn audience trust into income.</p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {steps.map((step, index) => (
@@ -481,7 +481,7 @@ function Footer() {
         </div>
         <div>
           <p className="font-black text-slate-950">Creators</p>
-          <div className="mt-4 grid gap-3 text-sm text-slate-600"><a>Find programs</a><a>Saved searches</a><a>Creator guides</a></div>
+          <div className="mt-4 grid gap-3 text-sm text-slate-600"><a>Scout Programs</a><a>Saved searches</a><a>Creator guides</a></div>
         </div>
         <div>
           <p className="font-black text-slate-950">Brands</p>
