@@ -233,9 +233,12 @@ function Hero() {
                   placeholder="Scout by niche, product, brand, audience, or commission type"
                 />
               </div>
-              <button className="min-h-14 rounded-2xl bg-slate-950 px-7 font-bold text-white hover:bg-slate-800">
-              Start scouting
-              </button>
+              <a
+  href="#directory"
+  className="flex min-h-14 items-center justify-center rounded-2xl bg-slate-950 px-7 font-bold text-white hover:bg-slate-800"
+>
+  Start scouting
+</a>
             </div>
           </div>
 
