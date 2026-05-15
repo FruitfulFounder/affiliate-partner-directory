@@ -151,14 +151,14 @@ const stats = [
 ];
 
 const featuredNiches = [
-  "Travel affiliate programs",
-  "Finance affiliate programs",
-  "Beauty brand partnerships",
-  "Pet product affiliates",
-  "Wellness creator offers",
-  "Fashion affiliate networks",
-  "Software referral programs",
-  "Parenting brand deals",
+  "Scout travel affiliate programs",
+  "Scout finance partner offers",
+  "Find beauty brand partnerships",
+  "Discover pet product affiliates",
+  "Compare wellness creator offers",
+  "Explore fashion affiliate networks",
+  "Find software referral programs",
+  "Scout parenting brand deals",
 ];
 
 function Header() {
@@ -402,7 +402,7 @@ function NicheBrowser() {
             <button key={niche} className="group rounded-[2rem] border bg-white p-6 text-left shadow-sm hover:shadow-lg">
               <Globe2 className="h-7 w-7 text-slate-700" />
               <p className="mt-5 font-black text-slate-950">{niche}</p>
-              <p className="mt-2 text-sm text-slate-500">Compare programs, payout details, partner rules, and fit.</p>
+              <p className="mt-2 text-sm text-slate-500">Scout programs, compare payout details, and find the best audience fit.</p>
               <div className="mt-5 flex items-center gap-2 text-sm font-bold text-slate-950">
                 Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </div>
