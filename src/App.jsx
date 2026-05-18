@@ -871,15 +871,15 @@ export default function AffiliatePartnerDirectory() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       <Header />
-      <Hero />
-      <Stats />
-      <Directory />
-      <NicheBrowser />
-      <WhoItsFor />
-      <HowItWorks />
-      <ForBrands />
-      <Pricing />
-      <Footer />
+<Hero />
+<Stats />
+<HowItWorks />
+<Directory />
+<NicheBrowser />
+<WhoItsFor />
+<ForBrands />
+<Pricing />
+<Footer />
     </div>
   );
 }
