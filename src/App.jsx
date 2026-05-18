@@ -308,7 +308,10 @@ function Hero() {
 
           <div className="space-y-4">
             {programs.slice(0, 3).map((program) => (
-              <div key={program.name} className="rounded-3xl border bg-slate-50 p-4">
+              <div
+                key={program.name}
+                className="rounded-3xl border bg-slate-50 p-4"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2">
@@ -353,7 +356,10 @@ function Stats() {
     <section className="border-y bg-white">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-8 sm:px-6 lg:grid-cols-4 lg:px-8">
         {stats.map((stat) => (
-          <div key={stat.label} className="rounded-3xl bg-slate-50 p-6 text-center">
+          <div
+            key={stat.label}
+            className="rounded-3xl bg-slate-50 p-6 text-center"
+          >
             <p className="text-3xl font-black text-slate-950">{stat.value}</p>
             <p className="mt-2 text-sm font-semibold text-slate-500">
               {stat.label}
@@ -622,17 +628,22 @@ function HowItWorks() {
     {
       icon: Search,
       title: "Search your niche",
-      text: "Find programs by industry, product type, audience, commission model, or brand name.",
+      text: "Start with your audience, niche, content topic, or product category.",
+    },
+    {
+      icon: Filter,
+      title: "Refine the fit",
+      text: "Narrow programs by commission type, payout style, audience match, and partner rules.",
     },
     {
       icon: CheckCircle2,
-      title: "Compare verified details",
-      text: "Review payouts, cookie windows, approval rules, platforms, and creator requirements.",
+      title: "Compare opportunities",
+      text: "Review program details, creator fit, brand relevance, and earning potential.",
     },
     {
       icon: TrendingUp,
       title: "Apply and grow",
-      text: "Build a shortlist, contact programs, and track your monetization opportunities.",
+      text: "Build a shortlist, apply to the right programs, and turn trusted content into revenue.",
     },
   ];
 
@@ -645,18 +656,21 @@ function HowItWorks() {
               How it works
             </p>
             <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
-              A scouting engine for affiliate growth.
+              A simple path from niche to partner.
             </h2>
             <p className="mt-4 text-slate-600">
-              PartnerScout helps creators and businesses scout affiliate
-              programs, compare partner opportunities, and turn audience trust
-              into income.
+              PartnerScout gives creators and businesses a clearer way to
+              search, refine, compare, and choose affiliate programs that fit
+              their audience.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (
-              <div key={step.title} className="rounded-[2rem] border bg-slate-50 p-6">
+              <div
+                key={step.title}
+                className="rounded-[2rem] border bg-slate-50 p-6"
+              >
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm">
                   <step.icon className="h-6 w-6 text-slate-700" />
                 </div>
@@ -702,7 +716,10 @@ function ForBrands() {
               "Featured niche placement",
               "Performance analytics",
             ].map((item) => (
-              <div key={item} className="flex items-center gap-3 rounded-2xl bg-white/10 p-4">
+              <div
+                key={item}
+                className="flex items-center gap-3 rounded-2xl bg-white/10 p-4"
+              >
                 <CheckCircle2 className="h-5 w-5" />
                 <span className="font-bold">{item}</span>
               </div>
@@ -779,7 +796,10 @@ function Pricing() {
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {tiers.map((tier) => (
-            <div key={tier.name} className="rounded-[2rem] border bg-slate-50 p-6">
+            <div
+              key={tier.name}
+              className="rounded-[2rem] border bg-slate-50 p-6"
+            >
               <h3 className="text-xl font-black text-slate-950">{tier.name}</h3>
               <p className="mt-4 text-4xl font-black text-slate-950">
                 {tier.price}
