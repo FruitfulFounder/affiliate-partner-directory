@@ -759,7 +759,44 @@ function ForBrands() {
     </section>
   );
 }
+function Waitlist() {
+  return (
+    <section className="bg-slate-50 py-20">
+      <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <div className="rounded-[2rem] border bg-white p-8 shadow-sm sm:p-10">
+          <p className="text-sm font-black uppercase tracking-widest text-slate-500">
+            Early access
+          </p>
 
+          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
+            Get early PartnerScout updates.
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-slate-600">
+            Be the first to know when new affiliate programs, categories,
+            scouting tools, and partner opportunities are added.
+          </p>
+
+          <div className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 sm:flex-row">
+            <input
+              className="min-h-14 flex-1 rounded-2xl border px-4 outline-none"
+              placeholder="Enter your email"
+              type="email"
+            />
+
+            <button className="min-h-14 rounded-2xl bg-slate-950 px-7 font-bold text-white hover:bg-slate-800">
+              Join the waitlist
+            </button>
+          </div>
+
+          <p className="mt-4 text-xs font-medium text-slate-500">
+            No spam. Just updates as PartnerScout grows.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
 function Pricing() {
   const tiers = [
     {
@@ -878,6 +915,7 @@ export default function AffiliatePartnerDirectory() {
 <NicheBrowser />
 <WhoItsFor />
 <ForBrands />
+<Waitlist />
 <Pricing />
 <Footer />
     </div>
