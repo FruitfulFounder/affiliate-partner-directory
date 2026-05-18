@@ -788,7 +788,28 @@ function Waitlist() {
               Join the waitlist
             </button>
           </div>
+          <div className="mx-auto mt-6 grid max-w-2xl gap-3 text-left sm:grid-cols-3">
+  <div className="rounded-2xl bg-slate-50 p-4">
+    <p className="font-bold text-slate-950">New programs</p>
+    <p className="mt-1 text-sm text-slate-600">
+      Get updates when new affiliate programs are added.
+    </p>
+  </div>
 
+  <div className="rounded-2xl bg-slate-50 p-4">
+    <p className="font-bold text-slate-950">Better scouting</p>
+    <p className="mt-1 text-sm text-slate-600">
+      Follow new filters, categories, and discovery tools.
+    </p>
+  </div>
+
+  <div className="rounded-2xl bg-slate-50 p-4">
+    <p className="font-bold text-slate-950">Early access</p>
+    <p className="mt-1 text-sm text-slate-600">
+      Be first to try new PartnerScout features.
+    </p>
+  </div>
+</div>
           <p className="mt-4 text-xs font-medium text-slate-500">
             No spam. Just updates as PartnerScout grows.
           </p>
