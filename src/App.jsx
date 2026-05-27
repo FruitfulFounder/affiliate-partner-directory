@@ -1,68 +1,40 @@
 import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import {
-  Search,
-  Filter,
-  Star,
   ArrowRight,
-  Users,
+  BadgeCheck,
+  BarChart3,
   Building2,
-  BadgeDollarSign,
   CheckCircle2,
-  TrendingUp,
+  ChevronDown,
+  Filter,
   Globe2,
-  ShieldCheck,
-  Menu,
-  X,
-  ExternalLink,
   Mail,
+  Map,
+  Menu,
+  Search,
+  ShieldCheck,
   Sparkles,
+  Star,
   Target,
-  Layers,
-  Clock,
-  MousePointerClick,
-  FileText,
-  HelpCircle,
+  Users,
+  X,
 } from "lucide-react";
 
-const categories = [
-  "All",
-  "Travel",
-  "Beauty & Skincare",
-  "Finance & Investing",
-  "Pets",
-  "Health & Wellness",
-  "Personal Growth",
-  "Parenting & Family",
-  "Fashion & Apparel",
-  "Entertainment & Music",
-  "Software & SaaS",
-  "Business Tools",
-  "Education & Courses",
-  "Home & Lifestyle",
-  "Food & Cooking",
-  "Creator Tools",
-];
+const BRAND = {
+  name: "AvaraPath",
+  slogan: "The simple path to affiliate connections.",
+  shortDescription: "Affiliate connection discovery",
+  headerLogo: "/images/brand/avarapath-header-logo.png",
+  iconLogo: "/images/brand/avarapath-icon-only.png",
+  simpleLogo: "/images/brand/avarapath-simple-logo.png",
+  fullLogo: "/images/brand/avarapath-primary-full-logo.png",
+};
 
-const commissionTypes = [
-  "All",
-  "Recurring",
-  "High-ticket",
-  "Lead commission",
-  "Signup commission",
-  "Product commission",
-  "Course commission",
-  "Subscription commission",
-];
-
-const audienceTypes = [
-  "All",
-  "Creators",
-  "Bloggers",
-  "Small Businesses",
-  "Agencies",
-  "Affiliate Managers",
-  "Niche Publishers",
+const stats = [
+  { value: "100+", label: "Affiliate programs tracked" },
+  { value: "35", label: "High-priority import candidates" },
+  { value: "84", label: "Link verified programs" },
+  { value: "0", label: "Duplicate brands in database" },
 ];
 
 const programs = [
@@ -663,67 +635,94 @@ const programs = [
   },
 ];
 
-const stats = [
-  { label: "Affiliate programs", value: "8,500+" },
-  { label: "Niches covered", value: "120+" },
-  { label: "Verified partners", value: "2,400+" },
-  { label: "Creator searches/month", value: "75K+" },
-];
+const categories = ["All", ...Array.from(new Set(programs.map((program) => program.category)))];
+const commissionTypes = ["All", ...Array.from(new Set(programs.map((program) => program.commissionType)))];
+const audienceTypes = ["All", ...Array.from(new Set(programs.map((program) => program.audienceType)))];
 
-const featuredNiches = [
-  "Scout travel affiliate programs",
-  "Scout finance partner offers",
-  "Find beauty brand partnerships",
-  "Discover pet product affiliates",
-  "Compare wellness creator offers",
-  "Explore fashion affiliate networks",
-  "Find software referral programs",
-  "Scout parenting brand deals",
-];
+function cn(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+function scrollToDirectory() {
+  const section = document.getElementById("directory");
+  if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function LogoMark({ className = "h-10 w-10" }) {
+  return (
+    <img
+      src={BRAND.iconLogo}
+      alt="AvaraPath icon"
+      className={cn("rounded-full object-contain", className)}
+    />
+  );
+}
 
 function Header() {
   const [open, setOpen] = useState(false);
 
+  const navItems = [
+    { label: "How it works", href: "#how-it-works" },
+    { label: "Affiliate directory", href: "#directory" },
+    { label: "For creators", href: "#for-creators" },
+    { label: "Pricing", href: "#pricing" },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#top" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-sm">
-            <BadgeDollarSign className="h-6 w-6" />
-          </div>
-          <div>
-            <p className="text-xl font-bold tracking-tight text-slate-950">PartnerScout</p>
-            <p className="text-xs font-medium text-slate-500">Affiliate partner discovery</p>
-          </div>
+          <img
+            src={BRAND.headerLogo}
+            alt="AvaraPath"
+            className="h-10 w-auto object-contain sm:h-12"
+          />
         </a>
 
-        <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-700 md:flex">
-          <a href="#how" className="hover:text-slate-950">How it works</a>
-          <a href="#directory" className="hover:text-slate-950">Scout Programs</a>
-          <a href="#niches" className="hover:text-slate-950">Niches</a>
-          <a href="#submit" className="hover:text-slate-950">List a Program</a>
-          <a href="#pricing" className="hover:text-slate-950">Pricing</a>
+        <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-700 lg:flex">
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href} className="transition hover:text-blue-700">
+              {item.label}
+            </a>
+          ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <a href="#waitlist" className="rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">Join waitlist</a>
-          <a href="#submit" className="rounded-xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800">List your program</a>
+        <div className="hidden items-center gap-3 lg:flex">
+          <a href="#waitlist" className="text-sm font-bold text-slate-700 hover:text-blue-700">
+            Join waitlist
+          </a>
+          <a
+            href="#submit-program"
+            className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white shadow-lg shadow-blue-950/10 transition hover:bg-blue-700"
+          >
+            List your program
+          </a>
         </div>
 
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-          {open ? <X /> : <Menu />}
+        <button
+          type="button"
+          className="rounded-xl border border-slate-200 p-2 lg:hidden"
+          onClick={() => setOpen((value) => !value)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t bg-white px-4 py-4 md:hidden">
-          <div className="grid gap-3 text-sm font-semibold text-slate-700">
-            <a href="#how">How it works</a>
-            <a href="#directory">Scout Programs</a>
-            <a href="#niches">Niches</a>
-            <a href="#submit">List a Program</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#waitlist" className="mt-2 rounded-xl bg-slate-950 px-4 py-3 text-center text-white">Join waitlist</a>
+        <div className="border-t border-slate-200 bg-white px-4 py-4 lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm font-bold text-slate-700">
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
+                {item.label}
+              </a>
+            ))}
+            <a href="#waitlist" onClick={() => setOpen(false)}>
+              Join waitlist
+            </a>
+            <a href="#submit-program" onClick={() => setOpen(false)}>
+              List your program
+            </a>
           </div>
         </div>
       )}
@@ -733,79 +732,95 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-slate-50">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(15,23,42,0.14),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(100,116,139,0.18),transparent_35%)]" />
-
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-24">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-            <Sparkles className="h-4 w-4" />
-            The scouting engine for affiliate partnerships
+    <section id="top" className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-br from-white via-blue-50/70 to-slate-100">
+      <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
+        <div className="relative z-10 flex flex-col justify-center">
+          <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-blue-200 bg-white/80 px-4 py-2 text-sm font-extrabold text-blue-900 shadow-sm">
+            <Sparkles className="h-4 w-4 text-blue-600" />
+            {BRAND.slogan}
           </div>
-
           <h1 className="max-w-4xl text-5xl font-black tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
-            Scout affiliate partners built for your audience.
+            Find the affiliate path built for your audience.
           </h1>
-
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            PartnerScout helps creators, publishers, and businesses discover affiliate programs by niche, commission type, audience fit, and growth potential.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">
+            AvaraPath helps creators, publishers, and businesses discover affiliate programs by niche,
+            commission type, audience fit, and growth potential.
           </p>
 
-          <div className="mt-8 rounded-3xl border bg-white p-3 shadow-xl shadow-slate-200/70">
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <div className="flex min-h-14 flex-1 items-center gap-3 rounded-2xl bg-slate-50 px-4">
-                <Search className="h-5 w-5 text-slate-500" />
-                <input className="w-full bg-transparent text-base outline-none placeholder:text-slate-400" placeholder="Scout by niche, product, brand, audience, or commission type" />
-              </div>
-
-              <a href="#directory" className="flex min-h-14 items-center justify-center rounded-2xl bg-slate-950 px-7 font-bold text-white hover:bg-slate-800">
-                Start scouting
-              </a>
+          <div className="mt-8 flex max-w-2xl flex-col gap-3 rounded-[2rem] border border-slate-950 bg-white p-3 shadow-2xl shadow-blue-950/10 sm:flex-row">
+            <div className="flex flex-1 items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3">
+              <Search className="h-5 w-5 text-blue-700" />
+              <span className="text-sm font-semibold text-slate-500 sm:text-base">
+                Search by niche, product, brand, audience, or commission
+              </span>
             </div>
+            <button
+              onClick={scrollToDirectory}
+              className="rounded-2xl bg-slate-950 px-6 py-4 font-extrabold text-white transition hover:bg-blue-700"
+            >
+              Start exploring
+            </button>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3 text-sm font-medium text-slate-600">
-            {featuredNiches.slice(0, 4).map((item) => (
-              <span key={item} className="rounded-full bg-white px-4 py-2 shadow-sm">{item}</span>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {[
+              "Find high-commission programs",
+              "Compare affiliate opportunities",
+              "Scout better audience fits",
+              "Build your partner path",
+            ].map((chip) => (
+              <span
+                key={chip}
+                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm"
+              >
+                {chip}
+              </span>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.55, delay: 0.1 }} className="rounded-[2rem] border bg-white p-5 shadow-2xl shadow-slate-200">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-semibold text-slate-500">Recommended match</p>
-              <h2 className="text-2xl font-black text-slate-950">Creator fit score</h2>
+        <div className="relative z-10 flex items-center justify-center">
+          <div className="relative w-full max-w-xl rounded-[2.5rem] border border-slate-950 bg-white p-6 shadow-2xl shadow-blue-950/15">
+            <div className="absolute -right-4 -top-4 rounded-full bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-xl">
+              35 import-ready
             </div>
-            <div className="rounded-2xl bg-slate-950 px-4 py-3 text-xl font-black text-white">94%</div>
-          </div>
+            <div className="mb-6 flex items-center justify-between gap-4 border-b border-slate-200 pb-5">
+              <div>
+                <p className="text-sm font-bold text-blue-700">Recommended match</p>
+                <h2 className="text-2xl font-black text-slate-950">Creator fit score</h2>
+              </div>
+              <div className="rounded-2xl bg-slate-950 px-5 py-4 text-2xl font-black text-white">94%</div>
+            </div>
 
-          <div className="space-y-4">
-            {programs.slice(0, 3).map((program) => (
-              <div key={program.name} className="rounded-3xl border bg-slate-50 p-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-black text-slate-950">{program.name}</h3>
-                      {program.verified && <ShieldCheck className="h-4 w-4 text-slate-700" />}
+            <div className="space-y-4">
+              {programs.slice(0, 3).map((program) => (
+                <div key={program.name} className="rounded-3xl border border-slate-300 bg-slate-50 p-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-black text-slate-950">{program.name}</h3>
+                        <BadgeCheck className="h-4 w-4 text-blue-700" />
+                      </div>
+                      <p className="mt-2 text-sm text-slate-700">{program.audience}</p>
                     </div>
-                    <p className="mt-1 text-sm text-slate-600">{program.bestFor}</p>
+                    <div className="flex shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-black text-slate-900">
+                      <Star className="h-4 w-4 fill-slate-900" />
+                      {program.rating}
+                    </div>
                   </div>
-
-                  <div className="flex items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-bold">
-                    <Star className="h-4 w-4 fill-current" /> {program.rating}
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {program.tags.map((tag) => (
+                      <span key={tag} className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {program.tags.map((tag) => (
-                    <span key={tag} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-600">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -813,12 +828,12 @@ function Hero() {
 
 function Stats() {
   return (
-    <section className="border-y bg-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-8 sm:px-6 lg:grid-cols-4 lg:px-8">
+    <section className="border-b border-slate-200 bg-white py-8">
+      <div className="mx-auto grid max-w-7xl gap-4 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         {stats.map((stat) => (
-          <div key={stat.label} className="rounded-3xl bg-slate-50 p-6 text-center">
-            <p className="text-3xl font-black text-slate-950">{stat.value}</p>
-            <p className="mt-2 text-sm font-semibold text-slate-500">{stat.label}</p>
+          <div key={stat.label} className="rounded-[2rem] bg-slate-50 p-8 text-center shadow-sm">
+            <p className="text-4xl font-black text-slate-950">{stat.value}</p>
+            <p className="mt-2 font-semibold text-slate-600">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -827,47 +842,48 @@ function Stats() {
 }
 
 function WhatItDoes() {
-  const cards = [
+  const items = [
     {
-      icon: Target,
-      title: "Find audience-fit programs",
-      text: "Scout opportunities by niche, audience type, product fit, and creator relevance.",
+      icon: <Search className="h-6 w-6" />,
+      title: "Discover affiliate programs",
+      text: "Search real affiliate opportunities by niche, category, audience fit, and commission type.",
     },
     {
-      icon: Layers,
-      title: "Compare key details",
-      text: "Review commission style, payout timing, cookie windows, platform, and difficulty.",
+      icon: <Target className="h-6 w-6" />,
+      title: "Compare partner fit",
+      text: "Use commission, cookie, platform, level, and audience notes to compare program quality faster.",
     },
     {
-      icon: MousePointerClick,
-      title: "Build a smarter shortlist",
-      text: "Move from random affiliate hunting to a more intentional partner discovery process.",
+      icon: <Map className="h-6 w-6" />,
+      title: "Follow a clearer path",
+      text: "AvaraPath keeps the process simple: find the program, understand the fit, then apply directly.",
     },
   ];
 
   return (
-    <section className="bg-white py-20">
+    <section id="for-creators" className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="text-sm font-black uppercase tracking-widest text-slate-500">What PartnerScout does</p>
-            <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">A cleaner way to discover affiliate opportunities.</h2>
-            <p className="mt-4 text-slate-600">
-              Instead of digging through scattered websites, PartnerScout organizes affiliate programs into a searchable scouting directory for creators, publishers, small businesses, and affiliate managers.
-            </p>
-          </div>
+        <div className="mb-10 max-w-3xl">
+          <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">What AvaraPath does</p>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+            Affiliate discovery without the messy searching.
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-slate-700">
+            AvaraPath is being built as a simple affiliate connection directory for creators, publishers,
+            and businesses that want better partner discovery.
+          </p>
+        </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {cards.map((card) => (
-              <div key={card.title} className="rounded-[2rem] border bg-slate-50 p-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm">
-                  <card.icon className="h-6 w-6 text-slate-700" />
-                </div>
-                <h3 className="mt-5 text-lg font-black text-slate-950">{card.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{card.text}</p>
+        <div className="grid gap-6 md:grid-cols-3">
+          {items.map((item) => (
+            <div key={item.title} className="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white to-blue-50/50 p-8 shadow-sm">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-700 text-white">
+                {item.icon}
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-black text-slate-950">{item.title}</h3>
+              <p className="mt-3 leading-7 text-slate-700">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -876,250 +892,289 @@ function WhatItDoes() {
 
 function HowItWorks() {
   const steps = [
-    {
-      icon: Search,
-      title: "Search your niche",
-      text: "Start with your audience, niche, content topic, or product category.",
-    },
-    {
-      icon: Filter,
-      title: "Refine the fit",
-      text: "Narrow programs by commission type, payout style, audience match, and partner rules.",
-    },
-    {
-      icon: CheckCircle2,
-      title: "Compare opportunities",
-      text: "Review program details, creator fit, brand relevance, and earning potential.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Apply and grow",
-      text: "Build a shortlist, apply to the right programs, and turn trusted content into revenue.",
-    },
+    ["01", "Search your niche", "Start with a topic, audience, brand, product type, or commission goal."],
+    ["02", "Refine the fit", "Filter by category, commission type, audience type, cookie window, and level."],
+    ["03", "Compare opportunities", "Review the program card to understand payout style, platform, and fit."],
+    ["04", "Apply and grow", "Use the program link to apply directly through the partner or affiliate page."],
   ];
 
   return (
-    <section id="how" className="bg-slate-50 py-20">
+    <section id="how-it-works" className="border-y border-slate-200 bg-slate-950 py-20 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-black uppercase tracking-widest text-slate-500">How it works</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">A simple path from niche to partner.</h2>
-          <p className="mt-4 text-slate-600">
-            PartnerScout gives creators and businesses a clearer way to search, refine, compare, and choose affiliate programs that fit their audience.
+        <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="max-w-3xl">
+            <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-300">How it works</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
+              A simple path from niche to partner.
+            </h2>
+          </div>
+          <p className="max-w-md text-slate-300">
+            The directory is designed to help you scout programs quickly without pretending every program is right for every audience.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, index) => (
-            <div key={step.title} className="rounded-[2rem] border bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 shadow-sm">
-                <step.icon className="h-6 w-6 text-slate-700" />
-              </div>
-              <p className="mt-5 text-sm font-black text-slate-400">0{index + 1}</p>
-              <h3 className="mt-2 text-xl font-black text-slate-950">{step.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{step.text}</p>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map(([number, title, text]) => (
+            <div key={number} className="rounded-[2rem] border border-white/10 bg-white/5 p-7 shadow-xl shadow-blue-950/20">
+              <p className="text-sm font-black text-blue-300">{number}</p>
+              <h3 className="mt-4 text-xl font-black">{title}</h3>
+              <p className="mt-3 leading-7 text-slate-300">{text}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ProgramCard({ program }) {
+  const detailItems = [
+    ["Commission", program.commission],
+    ["Payout", program.payout],
+    ["Cookie", program.cookie],
+    ["Level", program.difficulty],
+  ];
+
+  return (
+    <article className="flex h-full flex-col rounded-[2rem] border border-slate-950 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-950/10">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-800">
+          <Building2 className="h-6 w-6" />
+        </div>
+        <div className="flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-sm font-black text-slate-900">
+          <Star className="h-4 w-4 fill-slate-900" />
+          {program.rating}
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <div className="flex items-center gap-2">
+          <h3 className="text-xl font-black leading-tight text-slate-950">{program.name}</h3>
+          {program.verified && <BadgeCheck className="h-5 w-5 shrink-0 text-blue-700" />}
+        </div>
+        <p className="mt-2 text-sm font-black text-blue-900">{program.category}</p>
+        <p className="mt-4 min-h-[72px] leading-7 text-slate-700">{program.bestFor}</p>
+      </div>
+
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        {detailItems.map(([label, value]) => (
+          <div key={label} className="rounded-2xl bg-slate-50 p-4">
+            <p className="text-sm font-black text-slate-950">{label}</p>
+            <p className="mt-1 text-sm leading-5 text-slate-700">{value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-800">Why it matters</p>
+        <p className="mt-2 text-sm leading-6 text-slate-700">{program.premiumReason}</p>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {program.tags.map((tag) => (
+          <span key={tag} className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-bold text-slate-700">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <button className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 font-extrabold text-white transition hover:bg-blue-700">
+        Scout this program
+        <ArrowRight className="h-4 w-4" />
+      </button>
+    </article>
   );
 }
 
 function Directory() {
+  const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [commissionType, setCommissionType] = useState("All");
   const [audienceType, setAudienceType] = useState("All");
-  const [query, setQuery] = useState("");
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
-  const filtered = useMemo(() => {
+  const filteredPrograms = useMemo(() => {
+    const normalizedQuery = query.toLowerCase().trim();
+
     return programs.filter((program) => {
-      const categoryMatch = category === "All" || program.category === category;
-      const commissionMatch = commissionType === "All" || program.commissionType === commissionType;
-      const audienceMatch = audienceType === "All" || program.audienceType === audienceType;
-      const queryMatch = [
-        program.name,
-        program.category,
-        program.audience,
-        program.bestFor,
-        program.commission,
-        program.commissionType,
-        program.platform,
-        program.difficulty,
-        ...program.tags,
-      ]
-        .join(" ")
-        .toLowerCase()
-        .includes(query.toLowerCase());
+      const matchesQuery =
+        !normalizedQuery ||
+        [
+          program.name,
+          program.category,
+          program.commissionType,
+          program.audienceType,
+          program.audience,
+          program.bestFor,
+          program.platform,
+          program.premiumReason,
+          ...program.tags,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(normalizedQuery);
 
-      return categoryMatch && commissionMatch && audienceMatch && queryMatch;
+      const matchesCategory = category === "All" || program.category === category;
+      const matchesCommission = commissionType === "All" || program.commissionType === commissionType;
+      const matchesAudience = audienceType === "All" || program.audienceType === audienceType;
+
+      return matchesQuery && matchesCategory && matchesCommission && matchesAudience;
     });
-  }, [category, commissionType, audienceType, query]);
+  }, [query, category, commissionType, audienceType]);
 
   return (
     <section id="directory" className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
-            <p className="text-sm font-black uppercase tracking-widest text-slate-500">Affiliate directory</p>
-            <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Scout programs by niche, payout, and audience fit.</h2>
-            <p className="mt-4 max-w-2xl text-slate-600">
-              Built like a sourcing directory, but designed to help creators and businesses scout affiliate partnerships that match their audience.
+            <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Affiliate directory</p>
+            <h2 className="mt-4 max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+              Scout affiliate programs by niche, payout, and audience fit.
+            </h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">
+              Built like a sourcing directory, but designed to help creators and businesses find affiliate connections that fit their audience.
             </p>
           </div>
-
-          <a href="#waitlist" className="inline-flex items-center justify-center gap-2 rounded-2xl border px-5 py-3 font-bold text-slate-800 hover:bg-slate-50">
-            Refine scouting <Filter className="h-4 w-4" />
-          </a>
+          <button
+            onClick={() => setShowAdvanced((value) => !value)}
+            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-950 px-5 py-4 font-black text-slate-950 transition hover:bg-blue-50"
+          >
+            Refine path
+            <Filter className="h-4 w-4" />
+          </button>
         </div>
 
-        <div className="mt-8 grid gap-4 rounded-[2rem] border bg-slate-50 p-4 lg:grid-cols-[1fr_auto_auto_auto]">
-          <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm">
-            <Search className="h-5 w-5 text-slate-500" />
-            <input value={query} onChange={(e) => setQuery(e.target.value)} className="w-full outline-none" placeholder="Scout by niche, audience, product type, commission, or brand name" />
-          </div>
-
-          <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 shadow-sm">
-            <Filter className="h-5 w-5 text-slate-500" />
-            <select value={category} onChange={(e) => setCategory(e.target.value)} className="bg-white font-semibold outline-none">
-              {categories.map((cat) => <option key={cat}>{cat}</option>)}
-            </select>
-          </div>
-
-          <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 shadow-sm">
-            <BadgeDollarSign className="h-5 w-5 text-slate-500" />
-            <select value={commissionType} onChange={(e) => setCommissionType(e.target.value)} className="bg-white font-semibold outline-none">
-              {commissionTypes.map((type) => <option key={type}>{type}</option>)}
-            </select>
-          </div>
-
-          <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 shadow-sm">
-            <Users className="h-5 w-5 text-slate-500" />
-            <select value={audienceType} onChange={(e) => setAudienceType(e.target.value)} className="bg-white font-semibold outline-none">
-              {audienceTypes.map((type) => <option key={type}>{type}</option>)}
-            </select>
-          </div>
-        </div>
-
-        <div className="mt-4 flex flex-col gap-3 text-sm font-medium text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>Tip: Start with a niche, then refine by audience fit, commission type, or product category.</p>
-          <p>{filtered.length} program{filtered.length === 1 ? "" : "s"} showing</p>
-        </div>
-
-        <div className="mt-8 grid gap-5 lg:grid-cols-3">
-          {filtered.map((program) => (
-            <motion.article layout key={program.name} className="rounded-[2rem] border bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100">
-                  <Building2 className="h-6 w-6 text-slate-700" />
-                </div>
-
-                <div className="flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-sm font-bold text-slate-700">
-                  <Star className="h-4 w-4 fill-current" /> {program.rating}
-                </div>
-              </div>
-
-              <div className="mt-5">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-xl font-black text-slate-950">{program.name}</h3>
-                  {program.verified && <ShieldCheck className="h-5 w-5 text-slate-700" />}
-                </div>
-                <p className="mt-2 text-sm font-bold text-slate-500">{program.category}</p>
-                <p className="mt-3 text-slate-600">{program.bestFor}</p>
-              </div>
-
-              <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-2xl bg-slate-50 p-3">
-                  <p className="font-bold text-slate-950">Commission</p>
-                  <p className="mt-1 text-slate-600">{program.commission}</p>
-                </div>
-                <div className="rounded-2xl bg-slate-50 p-3">
-                  <p className="font-bold text-slate-950">Payout</p>
-                  <p className="mt-1 text-slate-600">{program.payout}</p>
-                </div>
-                <div className="rounded-2xl bg-slate-50 p-3">
-                  <p className="font-bold text-slate-950">Cookie</p>
-                  <p className="mt-1 text-slate-600">{program.cookie}</p>
-                </div>
-                <div className="rounded-2xl bg-slate-50 p-3">
-                  <p className="font-bold text-slate-950">Level</p>
-                  <p className="mt-1 text-slate-600">{program.difficulty}</p>
-                </div>
-              </div>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {program.tags.map((tag) => (
-                  <span key={tag} className="rounded-full border px-3 py-1 text-xs font-bold text-slate-600">{tag}</span>
-                ))}
-              </div>
-
-              <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 font-bold text-white hover:bg-slate-800">
-                Scout this program <ArrowRight className="h-4 w-4" />
-              </button>
-            </motion.article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function NicheBrowser() {
-  return (
-    <section id="niches" className="bg-slate-50 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-black uppercase tracking-widest text-slate-500">Browse by opportunity</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Turn your audience into a partner strategy.</h2>
-          <p className="mt-4 text-slate-600">Explore affiliate programs by niche, audience type, content format, commission model, and business goal.</p>
-        </div>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredNiches.map((niche) => (
-            <button key={niche} className="group rounded-[2rem] border bg-white p-6 text-left shadow-sm hover:shadow-lg">
-              <Globe2 className="h-7 w-7 text-slate-700" />
-              <p className="mt-5 font-black text-slate-950">{niche}</p>
-              <p className="mt-2 text-sm text-slate-500">Scout programs, compare payout details, and find the best audience fit.</p>
-              <div className="mt-5 flex items-center gap-2 text-sm font-bold text-slate-950">
-                Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WhoItsFor() {
-  const groups = [
-    { title: "Content Creators", text: "Find affiliate programs that match your niche, content style, and audience trust.", icon: Users },
-    { title: "Influencers", text: "Scout brands and products your followers already care about.", icon: Star },
-    { title: "Bloggers & Publishers", text: "Compare affiliate offers that fit your articles, reviews, guides, and newsletters.", icon: Globe2 },
-    { title: "Small Businesses", text: "Discover partner programs that can add new revenue streams to your website or audience.", icon: Building2 },
-    { title: "Agencies", text: "Build affiliate partner lists for clients across multiple niches and campaigns.", icon: TrendingUp },
-    { title: "Affiliate Managers", text: "Understand how creators search for programs and position your offer to get discovered.", icon: ShieldCheck },
-  ];
-
-  return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-black uppercase tracking-widest text-slate-500">Who it is for</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Built for anyone scouting better affiliate opportunities.</h2>
-          <p className="mt-4 text-slate-600">PartnerScout helps people turn their audience, content, website, or client work into smarter partnership opportunities.</p>
-        </div>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {groups.map((group) => (
-            <div key={group.title} className="rounded-[2rem] border bg-slate-50 p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm">
-                <group.icon className="h-6 w-6 text-slate-700" />
-              </div>
-              <h3 className="mt-5 text-xl font-black text-slate-950">{group.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{group.text}</p>
+        <div className="rounded-[2rem] border border-slate-950 bg-slate-50 p-4">
+          <div className="grid gap-3 lg:grid-cols-[1fr_260px]">
+            <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-4 shadow-sm">
+              <Search className="h-5 w-5 text-blue-700" />
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                className="w-full bg-transparent text-slate-900 outline-none placeholder:text-slate-400"
+                placeholder="Search by niche, audience, product type, commission, or brand name"
+              />
             </div>
+
+            <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-4 shadow-sm">
+              <Filter className="h-5 w-5 text-blue-700" />
+              <select
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+                className="w-full bg-transparent font-semibold text-slate-950 outline-none"
+              >
+                {categories.map((item) => (
+                  <option key={item}>{item}</option>
+                ))}
+              </select>
+              <ChevronDown className="h-4 w-4 text-slate-500" />
+            </div>
+          </div>
+
+          {showAdvanced && (
+            <div className="mt-3 grid gap-3 lg:grid-cols-2">
+              <div className="rounded-2xl bg-white px-4 py-4 shadow-sm">
+                <label className="mb-2 block text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                  Commission type
+                </label>
+                <select
+                  value={commissionType}
+                  onChange={(event) => setCommissionType(event.target.value)}
+                  className="w-full bg-transparent font-semibold text-slate-950 outline-none"
+                >
+                  {commissionTypes.map((item) => (
+                    <option key={item}>{item}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="rounded-2xl bg-white px-4 py-4 shadow-sm">
+                <label className="mb-2 block text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                  Audience type
+                </label>
+                <select
+                  value={audienceType}
+                  onChange={(event) => setAudienceType(event.target.value)}
+                  className="w-full bg-transparent font-semibold text-slate-950 outline-none"
+                >
+                  {audienceTypes.map((item) => (
+                    <option key={item}>{item}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-5 flex flex-col justify-between gap-3 text-sm font-semibold text-slate-600 sm:flex-row sm:items-center">
+          <p>
+            Showing <span className="font-black text-slate-950">{filteredPrograms.length}</span> of {programs.length} import-ready programs.
+          </p>
+          <p>Tip: Start with a niche, then refine by commission type, audience fit, or product category.</p>
+        </div>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filteredPrograms.map((program) => (
+            <ProgramCard key={program.name} program={program} />
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Pricing() {
+  return (
+    <section id="pricing" className="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 py-20 text-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 max-w-3xl">
+          <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-300">Free vs Pro path</p>
+          <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
+            Free discovery first. Premium intelligence later.
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-slate-300">
+            AvaraPath is currently being built around a free directory plus future premium discovery tools for higher-value affiliate opportunities.
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
+            <h3 className="text-2xl font-black">Free Directory</h3>
+            <p className="mt-3 text-slate-300">Broad affiliate discovery for creators and businesses.</p>
+            <ul className="mt-6 space-y-3">
+              {[
+                "Search affiliate programs by niche",
+                "View basic commission and category data",
+                "Find direct application/source links",
+                "Explore beginner-friendly opportunities",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-slate-200">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-300" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-[2rem] border border-blue-300 bg-white p-8 text-slate-950 shadow-2xl shadow-blue-950/30">
+            <div className="mb-4 inline-flex rounded-full bg-blue-700 px-4 py-2 text-sm font-black text-white">
+              Coming soon
+            </div>
+            <h3 className="text-2xl font-black">AvaraPath Pro</h3>
+            <p className="mt-3 text-slate-700">Premium filters, higher-value program notes, and scouting intelligence.</p>
+            <ul className="mt-6 space-y-3">
+              {[
+                "High-commission and recurring program views",
+                "Premium reason and opportunity notes",
+                "Advanced comparison filters",
+                "Member spotlight eligibility as the platform grows",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-slate-700">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -1128,37 +1183,33 @@ function WhoItsFor() {
 
 function SubmitProgram() {
   return (
-    <section id="submit" className="bg-slate-950 py-20 text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-        <div>
-          <p className="text-sm font-black uppercase tracking-widest text-slate-400">For affiliate managers</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight">Get discovered by creators ready to promote.</h2>
-          <p className="mt-4 text-slate-300">
-            List your affiliate program, verify your offer, and reach creators, publishers, agencies, and businesses searching for partner opportunities in your niche.
-          </p>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {["Verified program badge", "Creator lead requests", "Featured niche placement", "Program detail pages"].map((item) => (
-              <div key={item} className="flex items-center gap-3 rounded-2xl bg-white/10 p-4">
-                <CheckCircle2 className="h-5 w-5" />
-                <span className="font-bold">{item}</span>
-              </div>
-            ))}
+    <section id="submit-program" className="bg-white py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-8 rounded-[2.5rem] border border-slate-950 bg-gradient-to-br from-white to-blue-50 p-8 lg:grid-cols-[1fr_0.8fr] lg:p-12">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">For brands and programs</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950">
+              Want your affiliate program listed?
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700">
+              AvaraPath is building a cleaner way for creators and businesses to discover affiliate connections. Brands and affiliate managers will eventually be able to submit programs for review.
+            </p>
           </div>
-        </div>
-
-        <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-2xl">
-          <h3 className="text-2xl font-black">Submit an affiliate program</h3>
-          <p className="mt-2 text-sm text-slate-600">This form is a placeholder for the MVP. Later we can connect it to email, Airtable, Notion, or a database.</p>
-          <div className="mt-6 grid gap-4">
-            <input className="rounded-2xl border px-4 py-3 outline-none" placeholder="Company name" />
-            <input className="rounded-2xl border px-4 py-3 outline-none" placeholder="Affiliate program URL" />
-            <select className="rounded-2xl border px-4 py-3 outline-none">
-              <option>Select primary category</option>
-              {categories.filter((cat) => cat !== "All").map((cat) => <option key={cat}>{cat}</option>)}
-            </select>
-            <textarea className="min-h-28 rounded-2xl border px-4 py-3 outline-none" placeholder="Tell creators what makes your program worth joining" />
-            <button className="rounded-2xl bg-slate-950 px-5 py-4 font-black text-white hover:bg-slate-800">Submit program</button>
+          <div className="rounded-[2rem] bg-white p-6 shadow-xl shadow-blue-950/10">
+            <div className="flex items-center gap-3">
+              <ShieldCheck className="h-8 w-8 text-blue-700" />
+              <h3 className="text-xl font-black text-slate-950">Review-based listing</h3>
+            </div>
+            <p className="mt-4 leading-7 text-slate-700">
+              Programs should have clear application links, commission details, and rules before being marked fully public-ready.
+            </p>
+            <a
+              href="#waitlist"
+              className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 font-extrabold text-white transition hover:bg-blue-700"
+            >
+              Join launch updates
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </div>
@@ -1168,36 +1219,36 @@ function SubmitProgram() {
 
 function Waitlist() {
   return (
-    <section id="waitlist" className="bg-slate-50 py-20">
+    <section id="waitlist" className="border-y border-slate-200 bg-slate-50 py-20">
       <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border bg-white p-8 shadow-sm sm:p-10">
-          <p className="text-sm font-black uppercase tracking-widest text-slate-500">Early access</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Get early PartnerScout updates.</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-600">
-            Be the first to know when new affiliate programs, categories, scouting tools, and partner opportunities are added.
-          </p>
-
-          <div className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 sm:flex-row">
-            <input className="min-h-14 flex-1 rounded-2xl border px-4 outline-none" placeholder="Enter your email" type="email" />
-            <button className="min-h-14 rounded-2xl bg-slate-950 px-7 font-bold text-white hover:bg-slate-800">Join the waitlist</button>
+        <img src={BRAND.simpleLogo} alt="AvaraPath" className="mx-auto mb-8 h-28 w-auto object-contain" />
+        <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Early access</p>
+        <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+          Get early AvaraPath updates.
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-700">
+          Follow the build as the affiliate directory grows from curated data into a full discovery platform for affiliate connections.
+        </p>
+        <div className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 rounded-[2rem] border border-slate-950 bg-white p-3 shadow-xl sm:flex-row">
+          <div className="flex flex-1 items-center gap-3 rounded-2xl bg-slate-50 px-4 py-4">
+            <Mail className="h-5 w-5 text-blue-700" />
+            <input className="w-full bg-transparent outline-none" placeholder="Enter your email" />
           </div>
-
-          <div className="mx-auto mt-6 grid max-w-2xl gap-3 text-left sm:grid-cols-3">
-            <div className="rounded-2xl bg-slate-50 p-4">
-              <p className="font-bold text-slate-950">New programs</p>
-              <p className="mt-1 text-sm text-slate-600">Get updates when new affiliate programs are added.</p>
+          <button className="rounded-2xl bg-slate-950 px-6 py-4 font-extrabold text-white transition hover:bg-blue-700">
+            Join waitlist
+          </button>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {[
+            ["New programs", "Get updates as better affiliate opportunities are added."],
+            ["Better scouting", "Follow improvements to filters, categories, and program notes."],
+            ["Early access", "Be first in line as AvaraPath Pro takes shape."],
+          ].map(([title, text]) => (
+            <div key={title} className="rounded-3xl bg-white p-5 text-left shadow-sm">
+              <h3 className="font-black text-slate-950">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
             </div>
-            <div className="rounded-2xl bg-slate-50 p-4">
-              <p className="font-bold text-slate-950">Better scouting</p>
-              <p className="mt-1 text-sm text-slate-600">Follow new filters, categories, and discovery tools.</p>
-            </div>
-            <div className="rounded-2xl bg-slate-50 p-4">
-              <p className="font-bold text-slate-950">Early access</p>
-              <p className="mt-1 text-sm text-slate-600">Be first to try new PartnerScout features.</p>
-            </div>
-          </div>
-
-          <p className="mt-4 text-xs font-medium text-slate-500">No spam. Just updates as PartnerScout grows.</p>
+          ))}
         </div>
       </div>
     </section>
@@ -1205,44 +1256,33 @@ function Waitlist() {
 }
 
 function FAQ() {
-  const faqs = [
-    {
-      q: "Is PartnerScout an affiliate network?",
-      a: "Not exactly. PartnerScout is being built as a discovery directory that helps people find and compare affiliate programs across different niches and platforms.",
-    },
-    {
-      q: "Who is PartnerScout for?",
-      a: "It is for creators, bloggers, niche publishers, small businesses, agencies, and affiliate managers who want a clearer way to scout partnership opportunities.",
-    },
-    {
-      q: "Are the current program listings final?",
-      a: "No. The current listings are starter examples for the prototype. The MVP will need verified details, real links, updated terms, and more complete program data.",
-    },
-    {
-      q: "How will PartnerScout make money?",
-      a: "Possible revenue models include featured listings, brand submissions, premium creator filters, sponsorships, newsletter placements, and affiliate relationships.",
-    },
+  const questions = [
+    [
+      "Is AvaraPath an affiliate network?",
+      "No. The current MVP is a directory and discovery tool. Users apply directly through the affiliate or partner program pages.",
+    ],
+    [
+      "Are all programs fully verified?",
+      "The database currently separates link-verified, partially verified, and future fully verified rows. The site should be treated as discovery, not legal or financial advice.",
+    ],
+    [
+      "What will paid members get?",
+      "The planned paid value is premium discovery intelligence: higher-commission programs, recurring programs, better filters, comparison notes, and member visibility opportunities.",
+    ],
   ];
 
   return (
     <section className="bg-white py-20">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <p className="text-sm font-black uppercase tracking-widest text-slate-500">FAQ</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Questions before the full launch.</h2>
-          <p className="mt-4 text-slate-600">A few clear notes about what PartnerScout is becoming.</p>
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 text-center">
+          <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">FAQ</p>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950">Questions before launch</h2>
         </div>
-
-        <div className="mt-10 grid gap-4">
-          {faqs.map((faq) => (
-            <div key={faq.q} className="rounded-[2rem] border bg-slate-50 p-6">
-              <div className="flex gap-3">
-                <HelpCircle className="mt-1 h-5 w-5 flex-none text-slate-700" />
-                <div>
-                  <h3 className="font-black text-slate-950">{faq.q}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{faq.a}</p>
-                </div>
-              </div>
+        <div className="space-y-4">
+          {questions.map(([question, answer]) => (
+            <div key={question} className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+              <h3 className="text-lg font-black text-slate-950">{question}</h3>
+              <p className="mt-3 leading-7 text-slate-700">{answer}</p>
             </div>
           ))}
         </div>
@@ -1251,56 +1291,18 @@ function FAQ() {
   );
 }
 
-function TrustNotes() {
+function TrustNote() {
   return (
-    <section className="bg-slate-50 py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border bg-white p-6 shadow-sm md:p-8">
-          <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
-            <div>
-              <p className="text-sm font-black uppercase tracking-widest text-slate-500">Trust note</p>
-              <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950">Program details should be verified before applying.</h2>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
-                Affiliate terms can change. PartnerScout should eventually track source links, last-reviewed dates, program rules, and verified status so users can make better decisions.
-              </p>
-            </div>
-            <div className="flex min-w-fit items-center gap-2 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700">
-              <FileText className="h-5 w-5" /> MVP trust layer
-            </div>
-          </div>
+    <section className="bg-slate-950 py-14 text-white">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:px-8">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-700">
+          <ShieldCheck className="h-7 w-7" />
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Pricing() {
-  const tiers = [
-    { name: "Creator", price: "Free", text: "Search programs, browse categories, and build a starter shortlist.", cta: "Start scouting" },
-    { name: "Pro Creator", price: "$19/mo", text: "Advanced filters, alerts, saved lists, templates, and hidden opportunities.", cta: "Join waitlist" },
-    { name: "Brand Listing", price: "$99/mo", text: "Verified listing, creator leads, featured placement, and program analytics.", cta: "List program" },
-  ];
-
-  return (
-    <section id="pricing" className="bg-white py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-black uppercase tracking-widest text-slate-500">Pricing</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Simple plans for both sides of the marketplace.</h2>
-          <p className="mt-4 text-slate-600">These are placeholder MVP pricing ideas. We can adjust them before launch.</p>
-        </div>
-
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {tiers.map((tier) => (
-            <div key={tier.name} className="rounded-[2rem] border bg-slate-50 p-6">
-              <h3 className="text-xl font-black text-slate-950">{tier.name}</h3>
-              <p className="mt-4 text-4xl font-black text-slate-950">{tier.price}</p>
-              <p className="mt-4 min-h-14 text-slate-600">{tier.text}</p>
-              <a href={tier.name === "Brand Listing" ? "#submit" : tier.name === "Creator" ? "#directory" : "#waitlist"} className="mt-6 flex w-full items-center justify-center rounded-2xl bg-slate-950 px-5 py-3 font-black text-white hover:bg-slate-800">
-                {tier.cta}
-              </a>
-            </div>
-          ))}
+        <div>
+          <h2 className="text-2xl font-black">Trust note</h2>
+          <p className="mt-2 max-w-4xl leading-7 text-slate-300">
+            AvaraPath is being built as a discovery directory. Commission details, cookie windows, restrictions, and eligibility can change. Always review each program’s official terms before applying or promoting.
+          </p>
         </div>
       </div>
     </section>
@@ -1309,68 +1311,41 @@ function Pricing() {
 
 function Footer() {
   return (
-    <footer className="border-t bg-slate-50">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
-        <div>
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-white">
-              <BadgeDollarSign className="h-6 w-6" />
-            </div>
-            <p className="text-xl font-black text-slate-950">PartnerScout</p>
-          </div>
-          <p className="mt-4 max-w-sm text-sm leading-6 text-slate-600">
-            The scouting directory for affiliate programs, partner opportunities, creator monetization, and brand discovery.
-          </p>
-        </div>
-
-        <div>
-          <p className="font-black text-slate-950">Creators</p>
-          <div className="mt-4 grid gap-3 text-sm text-slate-600">
-            <a href="#directory">Scout programs</a>
-            <a href="#niches">Browse niches</a>
-            <a href="#waitlist">Join waitlist</a>
+    <footer className="bg-white py-10">
+      <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:px-8">
+        <div className="flex items-center gap-3">
+          <LogoMark className="h-12 w-12" />
+          <div>
+            <p className="text-xl font-black text-slate-950">{BRAND.name}</p>
+            <p className="text-sm font-semibold text-slate-600">{BRAND.slogan}</p>
           </div>
         </div>
-
-        <div>
-          <p className="font-black text-slate-950">Brands</p>
-          <div className="mt-4 grid gap-3 text-sm text-slate-600">
-            <a href="#submit">List program</a>
-            <a href="#submit">Submit details</a>
-            <a href="#pricing">Pricing ideas</a>
-          </div>
-        </div>
-
-        <div>
-          <p className="font-black text-slate-950">Contact</p>
-          <div className="mt-4 grid gap-3 text-sm text-slate-600">
-            <a className="flex items-center gap-2"><Mail className="h-4 w-4" /> hello@partnerscout.com</a>
-            <a className="flex items-center gap-2"><Clock className="h-4 w-4" /> Build in progress</a>
-            <a className="flex items-center gap-2"><ExternalLink className="h-4 w-4" /> Partner resources</a>
-          </div>
+        <div className="flex flex-wrap gap-5 text-sm font-bold text-slate-600">
+          <a href="#how-it-works" className="hover:text-blue-700">How it works</a>
+          <a href="#directory" className="hover:text-blue-700">Directory</a>
+          <a href="#submit-program" className="hover:text-blue-700">List a program</a>
+          <a href="#waitlist" className="hover:text-blue-700">Waitlist</a>
         </div>
       </div>
     </footer>
   );
 }
 
-export default function AffiliatePartnerDirectory() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
+    <main className="min-h-screen bg-white font-sans text-slate-950">
       <Header />
       <Hero />
       <Stats />
       <WhatItDoes />
       <HowItWorks />
       <Directory />
-      <NicheBrowser />
-      <WhoItsFor />
+      <Pricing />
       <SubmitProgram />
       <Waitlist />
       <FAQ />
-      <TrustNotes />
-      <Pricing />
+      <TrustNote />
       <Footer />
-    </div>
+    </main>
   );
 }
