@@ -2,12 +2,10 @@ import React, { useMemo, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
-  BarChart3,
   Building2,
   CheckCircle2,
   ChevronDown,
   Filter,
-  Globe2,
   Mail,
   Map,
   Menu,
@@ -16,7 +14,6 @@ import {
   Sparkles,
   Star,
   Target,
-  Users,
   X,
 } from "lucide-react";
 
@@ -669,17 +666,17 @@ function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-blue-100/80 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#top" className="flex items-center gap-3">
           <img
             src={BRAND.headerLogo}
             alt="AvaraPath"
-            className="h-10 w-auto object-contain sm:h-12"
+            className="h-9 w-auto object-contain sm:h-10"
           />
         </a>
 
-        <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-700 lg:flex">
+        <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 lg:flex">
           {navItems.map((item) => (
             <a key={item.href} href={item.href} className="transition hover:text-blue-700">
               {item.label}
@@ -688,12 +685,12 @@ function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href="#waitlist" className="text-sm font-bold text-slate-700 hover:text-blue-700">
+          <a href="#waitlist" className="text-sm font-bold text-slate-600 hover:text-blue-700">
             Join waitlist
           </a>
           <a
             href="#submit-program"
-            className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white shadow-lg shadow-blue-950/10 transition hover:bg-blue-700"
+            className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
           >
             List your program
           </a>
@@ -701,7 +698,7 @@ function Header() {
 
         <button
           type="button"
-          className="rounded-xl border border-slate-200 p-2 lg:hidden"
+          className="rounded-xl border border-blue-100 p-2 lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label="Toggle menu"
         >
@@ -710,7 +707,7 @@ function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-slate-200 bg-white px-4 py-4 lg:hidden">
+        <div className="border-t border-blue-100 bg-white px-4 py-4 lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm font-bold text-slate-700">
             {navItems.map((item) => (
               <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
@@ -732,7 +729,13 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-br from-white via-blue-50/70 to-slate-100">
+    <section id="top" className="relative overflow-hidden border-b border-blue-100 bg-gradient-to-br from-white via-blue-50/60 to-slate-50">
+      <img
+        src={BRAND.iconLogo}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-28 top-16 hidden w-[36rem] opacity-[0.05] lg:block"
+      />
       <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
         <div className="relative z-10 flex flex-col justify-center">
@@ -740,7 +743,7 @@ function Hero() {
             <Sparkles className="h-4 w-4 text-blue-600" />
             {BRAND.slogan}
           </div>
-          <h1 className="max-w-4xl text-5xl font-black tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl text-5xl font-extrabold tracking-tight text-[#071A3D] sm:text-6xl lg:text-7xl">
             Find the affiliate path built for your audience.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">
@@ -748,7 +751,7 @@ function Hero() {
             commission type, audience fit, and growth potential.
           </p>
 
-          <div className="mt-8 flex max-w-2xl flex-col gap-3 rounded-[2rem] border border-slate-950 bg-white p-3 shadow-2xl shadow-blue-950/10 sm:flex-row">
+          <div className="mt-8 flex max-w-2xl flex-col gap-3 rounded-3xl border border-blue-100 bg-white p-3 shadow-xl shadow-blue-950/10 sm:flex-row">
             <div className="flex flex-1 items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3">
               <Search className="h-5 w-5 text-blue-700" />
               <span className="text-sm font-semibold text-slate-500 sm:text-base">
@@ -757,7 +760,7 @@ function Hero() {
             </div>
             <button
               onClick={scrollToDirectory}
-              className="rounded-2xl bg-slate-950 px-6 py-4 font-extrabold text-white transition hover:bg-blue-700"
+              className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-6 py-4 font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
             >
               Start exploring
             </button>
@@ -772,7 +775,7 @@ function Hero() {
             ].map((chip) => (
               <span
                 key={chip}
-                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm"
+                className="rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm"
               >
                 {chip}
               </span>
@@ -781,30 +784,30 @@ function Hero() {
         </div>
 
         <div className="relative z-10 flex items-center justify-center">
-          <div className="relative w-full max-w-xl rounded-[2.5rem] border border-slate-950 bg-white p-6 shadow-2xl shadow-blue-950/15">
-            <div className="absolute -right-4 -top-4 rounded-full bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-xl">
+          <div className="relative w-full max-w-xl rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-xl shadow-blue-950/10">
+            <div className="absolute -right-4 -top-4 rounded-full bg-blue-600 px-5 py-3 text-sm font-extrabold text-white shadow-xl">
               35 import-ready
             </div>
-            <div className="mb-6 flex items-center justify-between gap-4 border-b border-slate-200 pb-5">
+            <div className="mb-6 flex items-center justify-between gap-4 border-b border-blue-100 pb-5">
               <div>
                 <p className="text-sm font-bold text-blue-700">Recommended match</p>
-                <h2 className="text-2xl font-black text-slate-950">Creator fit score</h2>
+                <h2 className="text-2xl font-extrabold text-[#071A3D]">Creator fit score</h2>
               </div>
-              <div className="rounded-2xl bg-slate-950 px-5 py-4 text-2xl font-black text-white">94%</div>
+              <div className="rounded-2xl bg-[#071A3D] px-5 py-4 text-2xl font-extrabold text-white">94%</div>
             </div>
 
             <div className="space-y-4">
               {programs.slice(0, 3).map((program) => (
-                <div key={program.name} className="rounded-3xl border border-slate-300 bg-slate-50 p-4">
+                <div key={program.name} className="rounded-3xl border border-blue-100 bg-slate-50/80 p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-black text-slate-950">{program.name}</h3>
+                        <h3 className="font-extrabold text-[#071A3D]">{program.name}</h3>
                         <BadgeCheck className="h-4 w-4 text-blue-700" />
                       </div>
                       <p className="mt-2 text-sm text-slate-700">{program.audience}</p>
                     </div>
-                    <div className="flex shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-black text-slate-900">
+                    <div className="flex shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-extrabold text-slate-900">
                       <Star className="h-4 w-4 fill-slate-900" />
                       {program.rating}
                     </div>
@@ -899,7 +902,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="border-y border-slate-200 bg-slate-950 py-20 text-white">
+    <section id="how-it-works" className="border-y border-blue-100 bg-[#071A3D] py-20 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
@@ -936,12 +939,12 @@ function ProgramCard({ program }) {
   ];
 
   return (
-    <article className="flex h-full flex-col rounded-[2rem] border border-slate-950 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-950/10">
+    <article className="flex h-full flex-col rounded-3xl border border-blue-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-950/10">
       <div className="flex items-start justify-between gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-800">
           <Building2 className="h-6 w-6" />
         </div>
-        <div className="flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-sm font-black text-slate-900">
+        <div className="flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-sm font-extrabold text-slate-900">
           <Star className="h-4 w-4 fill-slate-900" />
           {program.rating}
         </div>
@@ -949,36 +952,36 @@ function ProgramCard({ program }) {
 
       <div className="mt-6">
         <div className="flex items-center gap-2">
-          <h3 className="text-xl font-black leading-tight text-slate-950">{program.name}</h3>
+          <h3 className="text-xl font-extrabold leading-tight text-[#071A3D]">{program.name}</h3>
           {program.verified && <BadgeCheck className="h-5 w-5 shrink-0 text-blue-700" />}
         </div>
-        <p className="mt-2 text-sm font-black text-blue-900">{program.category}</p>
+        <p className="mt-2 text-sm font-extrabold text-blue-900">{program.category}</p>
         <p className="mt-4 min-h-[72px] leading-7 text-slate-700">{program.bestFor}</p>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
         {detailItems.map(([label, value]) => (
           <div key={label} className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-black text-slate-950">{label}</p>
+            <p className="text-sm font-extrabold text-[#071A3D]">{label}</p>
             <p className="mt-1 text-sm leading-5 text-slate-700">{value}</p>
           </div>
         ))}
       </div>
 
       <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
-        <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-800">Why it matters</p>
+        <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-blue-800">Why it matters</p>
         <p className="mt-2 text-sm leading-6 text-slate-700">{program.premiumReason}</p>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {program.tags.map((tag) => (
-          <span key={tag} className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-bold text-slate-700">
+          <span key={tag} className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
             {tag}
           </span>
         ))}
       </div>
 
-      <button className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 font-extrabold text-white transition hover:bg-blue-700">
+      <button className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-4 font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg">
         Scout this program
         <ArrowRight className="h-4 w-4" />
       </button>
@@ -1028,7 +1031,7 @@ function Directory() {
         <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Affiliate directory</p>
-            <h2 className="mt-4 max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+            <h2 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight text-[#071A3D] sm:text-5xl">
               Scout affiliate programs by niche, payout, and audience fit.
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">
@@ -1037,14 +1040,14 @@ function Directory() {
           </div>
           <button
             onClick={() => setShowAdvanced((value) => !value)}
-            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-950 px-5 py-4 font-black text-slate-950 transition hover:bg-blue-50"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-blue-100 px-5 py-4 font-extrabold text-[#071A3D] transition hover:bg-blue-50"
           >
             Refine path
             <Filter className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="rounded-[2rem] border border-slate-950 bg-slate-50 p-4">
+        <div className="rounded-3xl border border-blue-100 bg-slate-50 p-4 shadow-sm">
           <div className="grid gap-3 lg:grid-cols-[1fr_260px]">
             <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-4 shadow-sm">
               <Search className="h-5 w-5 text-blue-700" />
@@ -1124,7 +1127,7 @@ function Directory() {
 
 function Pricing() {
   return (
-    <section id="pricing" className="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 py-20 text-white">
+    <section id="pricing" className="bg-gradient-to-br from-[#071A3D] via-blue-950 to-[#071A3D] py-20 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-300">Free vs Pro path</p>
@@ -1293,7 +1296,7 @@ function FAQ() {
 
 function TrustNote() {
   return (
-    <section className="bg-slate-950 py-14 text-white">
+    <section className="bg-[#071A3D] py-14 text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:px-8">
         <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-700">
           <ShieldCheck className="h-7 w-7" />
@@ -1333,7 +1336,7 @@ function Footer() {
 
 export default function App() {
   return (
-    <main className="min-h-screen bg-white font-sans text-slate-950">
+    <main className="min-h-screen bg-white font-sans text-[#071A3D]">
       <Header />
       <Hero />
       <Stats />
