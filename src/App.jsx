@@ -27,6 +27,8 @@ const BRAND = {
   fullLogo: "/images/brand/avarapath-primary-full-logo.png",
 };
 
+const TALLY_FORM_URL = "https://tally.so/r/rjkN1p";
+
 const stats = [
   { value: "100+", label: "Affiliate programs tracked" },
   { value: "35", label: "High-priority import candidates" },
@@ -645,6 +647,10 @@ function scrollToDirectory() {
   if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function openTallyForm() {
+  window.open(TALLY_FORM_URL, "_blank", "noopener,noreferrer");
+}
+
 function LogoMark({ className = "h-10 w-10" }) {
   return (
     <img
@@ -685,15 +691,16 @@ function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href="#waitlist" className="text-sm font-bold text-slate-600 hover:text-blue-700">
+          <button type="button" onClick={openTallyForm} className="text-sm font-bold text-slate-600 hover:text-blue-700">
             Join waitlist
-          </a>
-          <a
-            href="#submit-program"
+          </button>
+          <button
+            type="button"
+            onClick={openTallyForm}
             className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
           >
             List your program
-          </a>
+          </button>
         </div>
 
         <button
@@ -714,12 +721,26 @@ function Header() {
                 {item.label}
               </a>
             ))}
-            <a href="#waitlist" onClick={() => setOpen(false)}>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openTallyForm();
+              }}
+              className="text-left"
+            >
               Join waitlist
-            </a>
-            <a href="#submit-program" onClick={() => setOpen(false)}>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openTallyForm();
+              }}
+              className="text-left"
+            >
               List your program
-            </a>
+            </button>
           </div>
         </div>
       )}
@@ -1207,7 +1228,7 @@ function SubmitProgram() {
               Programs should have clear application links, commission details, and rules before being marked fully public-ready.
             </p>
             <a
-              href="#waitlist"
+              href={TALLY_FORM_URL} target="_blank" rel="noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 font-extrabold text-white transition hover:bg-blue-700"
             >
               Join launch updates
@@ -1326,8 +1347,8 @@ function Footer() {
         <div className="flex flex-wrap gap-5 text-sm font-bold text-slate-600">
           <a href="#how-it-works" className="hover:text-blue-700">How it works</a>
           <a href="#directory" className="hover:text-blue-700">Directory</a>
-          <a href="#submit-program" className="hover:text-blue-700">List a program</a>
-          <a href="#waitlist" className="hover:text-blue-700">Waitlist</a>
+          <a href={TALLY_FORM_URL} target="_blank" rel="noreferrer" className="hover:text-blue-700">List a program</a>
+          <a href={TALLY_FORM_URL} target="_blank" rel="noreferrer" className="hover:text-blue-700">Waitlist</a>
         </div>
       </div>
     </footer>
