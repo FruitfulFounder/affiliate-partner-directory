@@ -994,10 +994,13 @@ function ProgramCard({ program }) {
         ))}
       </div>
 
-      <button className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-4 font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg">
+      <a
+        href="https://tally.so/r/rjkN1p"
+        className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-4 font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
+      >
         Scout this program
         <ArrowRight className="h-4 w-4" />
-      </button>
+      </a>
     </article>
   );
 }
@@ -1220,7 +1223,7 @@ function SubmitProgram() {
               Programs should have clear application links, commission details, and rules before being marked fully public-ready.
             </p>
             <a
-              href={TALLY_FORM_URL} target="_blank" rel="noreferrer"
+              href="https://tally.so/r/rjkN1p"
               className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 font-extrabold text-white transition hover:bg-blue-700"
             >
               Join launch updates
@@ -1310,6 +1313,96 @@ function FAQ() {
   );
 }
 
+
+function LegalSections() {
+  return (
+    <section id="legal" className="bg-white py-20">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10">
+          <p className="text-sm font-extrabold uppercase tracking-[0.25em] text-blue-700">
+            Trust & transparency
+          </p>
+          <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#071A3D] sm:text-5xl">
+            Basic policies for early access.
+          </h2>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">
+            These MVP policies explain how AvaraPath handles early access inquiries,
+            affiliate program information, and directory content while the platform is still being built.
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          <div id="privacy" className="rounded-3xl border border-blue-100 bg-slate-50 p-8">
+            <h3 className="text-2xl font-extrabold text-[#071A3D]">Privacy Policy</h3>
+            <div className="mt-4 space-y-4 leading-7 text-slate-700">
+              <p>
+                AvaraPath may collect information submitted through early access and inquiry forms,
+                including your name, email address, website or social link, inquiry type, and message.
+              </p>
+              <p>
+                This information is used to respond to inquiries, manage early access interest, review
+                affiliate program submissions, improve the directory, and understand what visitors are
+                looking for.
+              </p>
+              <p>
+                AvaraPath does not sell personal information. Form submissions may be processed through
+                third-party tools such as Tally, and the website may be hosted or delivered through
+                third-party services such as Vercel.
+              </p>
+              <p>
+                If you submit information and later want it removed, you may request removal once official
+                contact details are added to the site.
+              </p>
+            </div>
+          </div>
+
+          <div id="terms" className="rounded-3xl border border-blue-100 bg-slate-50 p-8">
+            <h3 className="text-2xl font-extrabold text-[#071A3D]">Terms / Disclaimer</h3>
+            <div className="mt-4 space-y-4 leading-7 text-slate-700">
+              <p>
+                AvaraPath is an affiliate program discovery directory. The information shown on this site
+                is provided for research and discovery purposes only.
+              </p>
+              <p>
+                Affiliate program details, commission rates, cookie windows, approval requirements,
+                restrictions, and availability can change at any time. Visitors should always review each
+                program’s official terms before applying, promoting, or relying on any information.
+              </p>
+              <p>
+                AvaraPath does not guarantee affiliate approval, earnings, commissions, traffic, sales,
+                program availability, or business results.
+              </p>
+              <p>
+                Nothing on this site should be treated as financial, legal, tax, or business advice.
+              </p>
+            </div>
+          </div>
+
+          <div id="affiliate-disclosure" className="rounded-3xl border border-blue-100 bg-slate-50 p-8">
+            <h3 className="text-2xl font-extrabold text-[#071A3D]">Affiliate Disclosure</h3>
+            <div className="mt-4 space-y-4 leading-7 text-slate-700">
+              <p>
+                AvaraPath may eventually earn referral fees, affiliate commissions, sponsorship revenue,
+                paid placement fees, or other compensation from some programs, brands, or partners listed
+                or discussed on the site.
+              </p>
+              <p>
+                Listings may include affiliate or partner relationships in the future. The goal of the
+                directory is to organize useful affiliate program information and help visitors discover
+                opportunities that may fit their audience.
+              </p>
+              <p>
+                Visitors should always review official program pages and terms before joining or promoting
+                any affiliate program.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TrustNote() {
   return (
     <section className="bg-[#071A3D] py-14 text-white">
@@ -1342,6 +1435,9 @@ function Footer() {
         <div className="flex flex-wrap gap-5 text-sm font-bold text-slate-600">
           <a href="#how-it-works" className="hover:text-blue-700">How it works</a>
           <a href="#directory" className="hover:text-blue-700">Directory</a>
+          <a href="#privacy" className="hover:text-blue-700">Privacy</a>
+          <a href="#terms" className="hover:text-blue-700">Terms</a>
+          <a href="#affiliate-disclosure" className="hover:text-blue-700">Affiliate Disclosure</a>
           <a href={TALLY_FORM_URL} target="_blank" rel="noreferrer" className="hover:text-blue-700">List a program</a>
           <a href={TALLY_FORM_URL} target="_blank" rel="noreferrer" className="hover:text-blue-700">Waitlist</a>
         </div>
@@ -1363,6 +1459,7 @@ export default function App() {
       <SubmitProgram />
       <Waitlist />
       <FAQ />
+      <LegalSections />
       <TrustNote />
       <Footer />
     </main>
