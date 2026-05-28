@@ -647,9 +647,7 @@ function scrollToDirectory() {
   if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function openTallyForm() {
-  window.open(TALLY_FORM_URL, "_blank", "noopener,noreferrer");
-}
+
 
 function LogoMark({ className = "h-10 w-10" }) {
   return (
@@ -691,16 +689,18 @@ function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <button type="button" onClick={openTallyForm} className="text-sm font-bold text-slate-600 hover:text-blue-700">
-            Join waitlist
-          </button>
-          <button
-            type="button"
-            onClick={openTallyForm}
-            className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
-          >
-            List your program
-          </button>
+        <a
+  href="https://tally.so/r/rjkN1p"
+  className="text-sm font-bold text-slate-600 hover:text-blue-700"
+>
+  Join waitlist
+</a>
+<a
+  href="https://tally.so/r/rjkN1p"
+  className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
+>
+  List your program
+</a>
         </div>
 
         <button
@@ -721,26 +721,18 @@ function Header() {
                 {item.label}
               </a>
             ))}
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                openTallyForm();
-              }}
-              className="text-left"
-            >
-              Join waitlist
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                openTallyForm();
-              }}
-              className="text-left"
-            >
-              List your program
-            </button>
+            <a
+  href="https://tally.so/r/rjkN1p"
+  className="text-left"
+>
+  Join waitlist
+</a>
+<a
+  href="https://tally.so/r/rjkN1p"
+  className="text-left"
+>
+  List your program
+</a>
           </div>
         </div>
       )}
@@ -1258,9 +1250,12 @@ function Waitlist() {
             <Mail className="h-5 w-5 text-blue-700" />
             <input className="w-full bg-transparent outline-none" placeholder="Enter your email" />
           </div>
-          <button className="rounded-2xl bg-slate-950 px-6 py-4 font-extrabold text-white transition hover:bg-blue-700">
-            Join waitlist
-          </button>
+          <a
+  href="https://tally.so/r/rjkN1p"
+  className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-6 py-4 text-center font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
+>
+  Join waitlist
+</a>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {[
