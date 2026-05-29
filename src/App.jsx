@@ -1140,31 +1140,41 @@ function Directory() {
     </section>
   );
 }
-
 function Pricing() {
   return (
     <section id="pricing" className="bg-gradient-to-br from-[#071A3D] via-blue-950 to-[#071A3D] py-20 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
-          <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-300">Free vs Pro path</p>
+          <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-300">
+            Membership paths
+          </p>
           <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-            Free discovery first. Premium intelligence later.
+            Start free. Upgrade when better discovery matters.
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-300">
-            AvaraPath is currently being built around a free directory plus future premium discovery tools for higher-value affiliate opportunities.
+            AvaraPath is being built around a free public directory plus simple paid directory paths
+            for people who want stronger affiliate discovery, premium program notes, and better
+            access to higher-value opportunities.
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-3">
           <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <h3 className="text-2xl font-black">Free Directory</h3>
-            <p className="mt-3 text-slate-300">Broad affiliate discovery for creators and businesses.</p>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-300">
+              Free
+            </p>
+            <h3 className="mt-3 text-2xl font-black">Free Directory</h3>
+            <p className="mt-3 text-4xl font-black">$0</p>
+            <p className="mt-3 text-slate-300">
+              For exploring public affiliate programs and getting familiar with the directory.
+            </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Search affiliate programs by niche",
-                "View basic commission and category data",
-                "Find direct application/source links",
-                "Explore beginner-friendly opportunities",
+                "Public affiliate directory",
+                "Basic search and filters",
+                "Basic program cards",
+                "General commission, cookie, and platform notes",
+                "Join waitlist or submit a program",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-slate-200">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-300" />
@@ -1174,27 +1184,72 @@ function Pricing() {
             </ul>
           </div>
 
-          <div className="rounded-[2rem] border border-blue-300 bg-white p-8 text-slate-950 shadow-2xl shadow-blue-950/30">
-            <div className="mb-4 inline-flex rounded-full bg-blue-700 px-4 py-2 text-sm font-black text-white">
-              Coming soon
-            </div>
-            <h3 className="text-2xl font-black">AvaraPath Pro</h3>
-            <p className="mt-3 text-slate-700">Premium filters, higher-value program notes, and scouting intelligence.</p>
-            <ul className="mt-6 space-y-3">
+          <div className="relative overflow-hidden rounded-[2rem] border-2 border-slate-300 bg-gradient-to-br from-white via-slate-100 to-slate-300 p-8 text-[#071A3D] shadow-2xl shadow-slate-400/30">
+            <div className="absolute -right-20 -top-20 h-44 w-44 rounded-full bg-white/50 blur-2xl" />
+            <div className="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-slate-400 via-white to-slate-500" />
+
+            <p className="relative text-sm font-black uppercase tracking-[0.2em] text-slate-600">
+              Silver
+            </p>
+            <h3 className="relative mt-3 text-2xl font-black">Plus Directory</h3>
+            <p className="relative mt-3 text-4xl font-black">$9/mo</p>
+            <p className="relative mt-3 text-slate-700">
+              For creators, publishers, side hustlers, and small businesses who want better affiliate
+              discovery than the free directory.
+            </p>
+            <ul className="relative mt-6 space-y-3">
               {[
-                "High-commission and recurring program views",
-                "Premium reason and opportunity notes",
-                "Advanced comparison filters",
-                "Member spotlight eligibility as the platform grows",
+                "Premium affiliate opportunity lists",
+                "High-commission program discovery",
+                "Recurring commission program discovery",
+                "High-ticket program discovery",
+                "Premium reason notes",
+                "New program drops",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-slate-700">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative overflow-hidden rounded-[2rem] border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-yellow-200 p-8 text-[#071A3D] shadow-2xl shadow-yellow-500/30">
+            <div className="absolute -right-20 -top-20 h-44 w-44 rounded-full bg-yellow-300/50 blur-2xl" />
+            <div className="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-600" />
+
+            <p className="relative text-sm font-black uppercase tracking-[0.2em] text-yellow-700">
+              Gold
+            </p>
+            <h3 className="relative mt-3 text-2xl font-black">Full Directory</h3>
+            <p className="relative mt-3 text-4xl font-black">$29/mo</p>
+            <p className="relative mt-3 text-slate-700">
+              For members who want broader premium access, stronger discovery tools, and priority
+              consideration as AvaraPath grows.
+            </p>
+            <ul className="relative mt-6 space-y-3">
+              {[
+                "Everything in Plus Directory",
+                "Full premium directory access",
+                "Early access to new features",
+                "Priority niche/program request consideration",
+                "Priority review for submitted programs",
+                "Member spotlight consideration",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-slate-700">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-yellow-600" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
         </div>
+
+        <p className="mt-8 max-w-4xl text-sm leading-6 text-slate-300">
+          Paid membership details are being prepared for launch. AvaraPath does not guarantee
+          affiliate approval, earnings, commissions, or business results. Members should always
+          review each program’s official terms before applying or promoting.
+        </p>
       </div>
     </section>
   );
