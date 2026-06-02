@@ -1405,9 +1405,13 @@ function LegalSections() {
                 third-party services such as Vercel.
               </p>
               <p>
-                If you submit information and later want it removed, you may request removal once official
-                contact details are added to the site.
-              </p>
+  If you submit information and later want it removed, you may request removal by contacting
+  AvaraPath at{" "}
+  <a href="mailto:contact@avarapath.com" className="font-bold text-blue-700 hover:underline">
+    contact@avarapath.com
+  </a>
+  .
+</p>
             </div>
           </div>
 
@@ -1485,6 +1489,12 @@ function Footer() {
           <div>
             <p className="text-xl font-black text-slate-950">{BRAND.name}</p>
             <p className="text-sm font-semibold text-slate-600">{BRAND.slogan}</p>
+            <a
+  href="mailto:contact@avarapath.com"
+  className="mt-1 block text-sm font-semibold text-blue-700 hover:underline"
+>
+  contact@avarapath.com
+</a>
           </div>
         </div>
         <div className="flex flex-wrap gap-5 text-sm font-bold text-slate-600">
