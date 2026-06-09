@@ -649,6 +649,7 @@ function scrollToDirectory() {
 
 
 
+
 function LogoMark({ className = "h-10 w-10" }) {
   return (
     <img
@@ -659,14 +660,23 @@ function LogoMark({ className = "h-10 w-10" }) {
   );
 }
 
+const MEMBER_PREVIEW_PROGRAMS = new Set([
+  "Kit Affiliate Program",
+  "Coursera Affiliate Program",
+  "HubSpot Affiliate Program",
+  "Leadpages Affiliate Program",
+  "Kinsta Affiliate Program",
+  "Hostinger Affiliate Program",
+]);
+
 function Header() {
   const [open, setOpen] = useState(false);
 
   const navItems = [
     { label: "How it works", href: "#how-it-works" },
-    { label: "Affiliate directory", href: "#directory" },
-    { label: "For creators", href: "#for-creators" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Directory", href: "#directory" },
+    { label: "Membership", href: "#pricing" },
+    { label: "For brands", href: "#submit-program" },
   ];
 
   return (
@@ -689,18 +699,15 @@ function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-        <a
-  href="https://tally.so/r/rjkN1p"
-  className="text-sm font-bold text-slate-600 hover:text-blue-700"
->
-  Join waitlist
-</a>
-<a
-  href="https://tally.so/r/rjkN1p"
-  className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
->
-  List your program
-</a>
+          <a href={TALLY_FORM_URL} className="text-sm font-bold text-slate-600 hover:text-blue-700">
+            Get free updates
+          </a>
+          <a
+            href={TALLY_FORM_URL}
+            className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
+          >
+            List your program
+          </a>
         </div>
 
         <button
@@ -721,18 +728,12 @@ function Header() {
                 {item.label}
               </a>
             ))}
-            <a
-  href="https://tally.so/r/rjkN1p"
-  className="text-left"
->
-  Join waitlist
-</a>
-<a
-  href="https://tally.so/r/rjkN1p"
-  className="text-left"
->
-  List your program
-</a>
+            <a href={TALLY_FORM_URL} onClick={() => setOpen(false)}>
+              Get free updates
+            </a>
+            <a href={TALLY_FORM_URL} onClick={() => setOpen(false)}>
+              List your program
+            </a>
           </div>
         </div>
       )}
@@ -757,39 +758,35 @@ function Hero() {
             {BRAND.slogan}
           </div>
           <h1 className="max-w-4xl text-5xl font-extrabold tracking-tight text-[#071A3D] sm:text-6xl lg:text-7xl">
-            Find the affiliate path built for your audience.
+            Find better affiliate paths for your audience.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">
-            AvaraPath helps creators, publishers, and businesses discover affiliate programs by niche,
-            commission type, audience fit, and growth potential.
+            AvaraPath helps creators, publishers, and businesses explore public affiliate programs for free, then upgrade for premium opportunity discovery, niche paths, and strategy-focused program notes.
           </p>
 
           <div className="mt-8 flex max-w-2xl flex-col gap-3 rounded-3xl border border-blue-100 bg-white p-3 shadow-xl shadow-blue-950/10 sm:flex-row">
             <div className="flex flex-1 items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3">
               <Search className="h-5 w-5 text-blue-700" />
               <span className="text-sm font-semibold text-slate-500 sm:text-base">
-                Search by niche, product, brand, audience, or commission
+                Search public opportunities by niche, audience, brand, or commission
               </span>
             </div>
             <button
               onClick={scrollToDirectory}
               className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-6 py-4 font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
             >
-              Start exploring
+              Explore free directory
             </button>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
             {[
-              "Find high-commission programs",
-              "Compare affiliate opportunities",
-              "Scout better audience fits",
-              "Build your partner path",
+              "Free public directory",
+              "Member previews",
+              "Premium opportunity drops",
+              "Niche-specific affiliate paths",
             ].map((chip) => (
-              <span
-                key={chip}
-                className="rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm"
-              >
+              <span key={chip} className="rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm">
                 {chip}
               </span>
             ))}
@@ -797,41 +794,37 @@ function Hero() {
         </div>
 
         <div className="relative z-10 flex items-center justify-center">
-          <div className="relative w-full max-w-xl rounded-[2rem] border border-blue-100 bg-white/95 p-6 shadow-xl shadow-blue-950/10">
-            <div className="absolute -right-4 -top-4 rounded-full bg-blue-600 px-5 py-3 text-sm font-extrabold text-white shadow-xl">
-              35 import-ready
+          <div className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-red-500/30 bg-gradient-to-br from-[#020617] via-[#071A3D] to-[#111827] p-6 text-white shadow-2xl shadow-blue-950/30">
+            <img
+              src={BRAND.iconLogo}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-14 -top-16 h-64 w-64 opacity-[0.08]"
+            />
+            <div className="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-red-600 via-blue-500 to-red-500" />
+            <div className="absolute -right-4 -top-4 rounded-full bg-gradient-to-r from-red-600 to-blue-700 px-5 py-3 text-sm font-extrabold text-white shadow-xl">
+              Membership preview
             </div>
-            <div className="mb-6 flex items-center justify-between gap-4 border-b border-blue-100 pb-5">
+            <div className="relative mb-6 flex items-center justify-between gap-4 border-b border-white/10 pb-5">
               <div>
-                <p className="text-sm font-bold text-blue-700">Recommended match</p>
-                <h2 className="text-2xl font-extrabold text-[#071A3D]">Creator fit score</h2>
+                <p className="text-sm font-bold text-red-300">AvaraPath Membership</p>
+                <h2 className="text-2xl font-extrabold">Opportunity intelligence</h2>
               </div>
-              <div className="rounded-2xl bg-[#071A3D] px-5 py-4 text-2xl font-extrabold text-white">94%</div>
+              <div className="rounded-2xl bg-white px-5 py-4 text-2xl font-extrabold text-[#071A3D]">$49</div>
             </div>
 
-            <div className="space-y-4">
-              {programs.slice(0, 3).map((program) => (
-                <div key={program.name} className="rounded-3xl border border-blue-100 bg-slate-50/80 p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-extrabold text-[#071A3D]">{program.name}</h3>
-                        <BadgeCheck className="h-4 w-4 text-blue-700" />
-                      </div>
-                      <p className="mt-2 text-sm text-slate-700">{program.audience}</p>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-extrabold text-slate-900">
-                      <Star className="h-4 w-4 fill-slate-900" />
-                      {program.rating}
-                    </div>
+            <div className="relative space-y-4">
+              {[
+                ["Free Directory", "Browse a useful public sample and learn the AvaraPath system."],
+                ["Member previews", "Spot higher-value examples that point toward the paid membership."],
+                ["AvaraPath Membership", "Unlock premium opportunity drops, niche paths, strategy notes, and ongoing updates."],
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="h-4 w-4 text-red-300" />
+                    <h3 className="font-extrabold">{title}</h3>
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {program.tags.map((tag) => (
-                      <span key={tag} className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
                 </div>
               ))}
             </div>
@@ -861,18 +854,18 @@ function WhatItDoes() {
   const items = [
     {
       icon: <Search className="h-6 w-6" />,
-      title: "Discover affiliate programs",
-      text: "Search real affiliate opportunities by niche, category, audience fit, and commission type.",
+      title: "Explore basic opportunities free",
+      text: "Browse a public sample of affiliate programs and learn which niches, categories, and commission types exist.",
     },
     {
       icon: <Target className="h-6 w-6" />,
-      title: "Compare partner fit",
-      text: "Use commission, cookie, platform, level, and audience notes to compare program quality faster.",
+      title: "Spot higher-value paths",
+      text: "Member previews show the kind of stronger opportunities paid members can find more consistently.",
     },
     {
       icon: <Map className="h-6 w-6" />,
-      title: "Follow a clearer path",
-      text: "AvaraPath keeps the process simple: find the program, understand the fit, then apply directly.",
+      title: "Upgrade for ongoing direction",
+      text: "Membership is designed around premium drops, niche paths, program notes, promotion angles, and updates over time.",
     },
   ];
 
@@ -882,11 +875,10 @@ function WhatItDoes() {
         <div className="mb-10 max-w-3xl">
           <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">What AvaraPath does</p>
           <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
-            Affiliate discovery without the messy searching.
+            A free starting point with a premium path forward.
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-700">
-            AvaraPath is being built as a simple affiliate connection directory for creators, publishers,
-            and businesses that want better partner discovery.
+            AvaraPath is being shaped into an affiliate opportunity growth system. The public directory helps anyone begin, while membership is built for people who want better opportunities and clearer next steps.
           </p>
         </div>
 
@@ -908,10 +900,10 @@ function WhatItDoes() {
 
 function HowItWorks() {
   const steps = [
-    ["01", "Search your niche", "Start with a topic, audience, brand, product type, or commission goal."],
-    ["02", "Refine the fit", "Filter by category, commission type, audience type, cookie window, and level."],
-    ["03", "Compare opportunities", "Review the program card to understand payout style, platform, and fit."],
-    ["04", "Apply and grow", "Use the program link to apply directly through the partner or affiliate page."],
+    ["01", "Search free opportunities", "Anyone can use the public directory to explore basic affiliate programs by niche, category, and audience fit."],
+    ["02", "Notice member previews", "A few stronger examples show the kind of higher-value opportunities members can discover more consistently."],
+    ["03", "Join for premium access", "Membership is built around opportunity drops, niche-specific paths, program updates, and strategy notes."],
+    ["04", "Apply with better direction", "Use recommendations, caution notes, and promotion angles to decide which programs to pursue first."],
   ];
 
   return (
@@ -921,11 +913,11 @@ function HowItWorks() {
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-300">How it works</p>
             <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-              A simple path from niche to partner.
+              Search basic opportunities free. Join to unlock premium affiliate paths.
             </h2>
           </div>
           <p className="max-w-md text-slate-300">
-            The directory is designed to help you scout programs quickly without pretending every program is right for every audience.
+            Free users get a useful starting point. Members get deeper opportunity discovery, strategy notes, and ongoing updates designed to help them keep finding better partner paths over time.
           </p>
         </div>
 
@@ -944,6 +936,7 @@ function HowItWorks() {
 }
 
 function ProgramCard({ program }) {
+  const isMemberPreview = MEMBER_PREVIEW_PROGRAMS.has(program.name);
   const detailItems = [
     ["Commission", program.commission],
     ["Payout", program.payout],
@@ -951,58 +944,84 @@ function ProgramCard({ program }) {
     ["Level", program.difficulty],
   ];
 
-  return (
-    <article className="flex h-full flex-col rounded-3xl border border-blue-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-950/10">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-800">
+  const cardClass = isMemberPreview
+    ? "group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-red-500/60 bg-gradient-to-br from-[#020617] via-[#071A3D] to-[#111827] p-6 text-white shadow-xl shadow-red-950/20 transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-950/30"
+    : "flex h-full flex-col rounded-3xl border border-blue-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-950/10";
+
+  const body = (
+    <article className={cardClass}>
+      {isMemberPreview && (
+        <>
+          <div className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-red-500/20 blur-2xl" />
+          <div className="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-red-600 via-blue-500 to-red-500" />
+        </>
+      )}
+
+      <div className="relative flex items-start justify-between gap-4">
+        <div className={cn("flex h-12 w-12 items-center justify-center rounded-2xl", isMemberPreview ? "bg-white/10 text-red-300" : "bg-blue-50 text-blue-800")}>
           <Building2 className="h-6 w-6" />
         </div>
-        <div className="flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-sm font-extrabold text-slate-900">
-          <Star className="h-4 w-4 fill-slate-900" />
-          {program.rating}
-        </div>
+        {isMemberPreview && (
+          <div className="rounded-full bg-red-600 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-white">
+            Member preview
+          </div>
+        )}
       </div>
 
-      <div className="mt-6">
+      <div className="relative mt-6">
         <div className="flex items-center gap-2">
-          <h3 className="text-xl font-extrabold leading-tight text-[#071A3D]">{program.name}</h3>
-          {program.verified && <BadgeCheck className="h-5 w-5 shrink-0 text-blue-700" />}
+          <h3 className={cn("text-xl font-extrabold leading-tight", isMemberPreview ? "text-white" : "text-[#071A3D]")}>{program.name}</h3>
+          {program.verified && <BadgeCheck className={cn("h-5 w-5 shrink-0", isMemberPreview ? "text-red-300" : "text-blue-700")} />}
         </div>
-        <p className="mt-2 text-sm font-extrabold text-blue-900">{program.category}</p>
-        <p className="mt-4 min-h-[72px] leading-7 text-slate-700">{program.bestFor}</p>
+        <p className={cn("mt-2 text-sm font-extrabold", isMemberPreview ? "text-red-300" : "text-blue-900")}>{program.category}</p>
+        <p className={cn("mt-4 min-h-[72px] leading-7", isMemberPreview ? "text-slate-300" : "text-slate-700")}>{program.bestFor}</p>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3">
+      <div className="relative mt-4 grid grid-cols-2 gap-3">
         {detailItems.map(([label, value]) => (
-          <div key={label} className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-extrabold text-[#071A3D]">{label}</p>
-            <p className="mt-1 text-sm leading-5 text-slate-700">{value}</p>
+          <div key={label} className={cn("rounded-2xl p-4", isMemberPreview ? "bg-white/10" : "bg-slate-50")}>
+            <p className={cn("text-sm font-extrabold", isMemberPreview ? "text-white" : "text-[#071A3D]")}>{label}</p>
+            <p className={cn("mt-1 text-sm leading-5", isMemberPreview ? "text-slate-300" : "text-slate-700")}>{value}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
-        <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-blue-800">Why it matters</p>
-        <p className="mt-2 text-sm leading-6 text-slate-700">{program.premiumReason}</p>
+      <div className={cn("relative mt-4 rounded-2xl p-4", isMemberPreview ? "border border-red-500/30 bg-white/10" : "border border-blue-100 bg-blue-50/60")}>
+        <p className={cn("text-xs font-extrabold uppercase tracking-[0.18em]", isMemberPreview ? "text-red-300" : "text-blue-800")}>Why it matters</p>
+        <p className={cn("mt-2 text-sm leading-6", isMemberPreview ? "text-slate-300" : "text-slate-700")}>{program.premiumReason}</p>
+        {isMemberPreview && (
+          <p className="mt-3 text-sm font-bold leading-6 text-white">
+            Members get more opportunities like this, plus niche paths, promotion angles, caution notes, and ongoing opportunity drops.
+          </p>
+        )}
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="relative mt-4 flex flex-wrap gap-2">
         {program.tags.map((tag) => (
-          <span key={tag} className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-slate-700">
+          <span key={tag} className={cn("rounded-full px-3 py-1 text-xs font-bold", isMemberPreview ? "border border-white/10 bg-white/10 text-slate-200" : "border border-blue-100 bg-white text-slate-700")}>
             {tag}
           </span>
         ))}
       </div>
 
-      <a
-        href="https://tally.so/r/rjkN1p"
-        className="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-5 py-4 font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
-      >
-        Scout this program
-        <ArrowRight className="h-4 w-4" />
-      </a>
+      {isMemberPreview && (
+        <div className="relative mt-6 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 to-blue-700 px-5 py-4 font-extrabold text-white shadow-md shadow-red-950/20 transition group-hover:shadow-lg">
+          Join to view more like this
+          <ArrowRight className="h-4 w-4" />
+        </div>
+      )}
     </article>
   );
+
+  if (isMemberPreview) {
+    return (
+      <a href={TALLY_FORM_URL} target="_blank" rel="noreferrer" className="block h-full" aria-label={`Join AvaraPath Membership to view more opportunities like ${program.name}`}>
+        {body}
+      </a>
+    );
+  }
+
+  return body;
 }
 
 function Directory() {
@@ -1041,17 +1060,19 @@ function Directory() {
     });
   }, [query, category, commissionType, audienceType]);
 
+  const memberPreviewCount = filteredPrograms.filter((program) => MEMBER_PREVIEW_PROGRAMS.has(program.name)).length;
+
   return (
     <section id="directory" className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Affiliate directory</p>
+            <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Free directory</p>
             <h2 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight text-[#071A3D] sm:text-5xl">
-              Scout affiliate programs by niche, payout, and audience fit.
+              Browse public affiliate opportunities and spot member previews.
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">
-              Built like a sourcing directory, but designed to help creators and businesses find affiliate connections that fit their audience.
+              The public directory is a useful starting point. Basic listings stay clean and free, while occasional member previews show the stronger opportunities AvaraPath Membership is being built to unlock more consistently.
             </p>
           </div>
           <button
@@ -1077,11 +1098,7 @@ function Directory() {
 
             <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-4 shadow-sm">
               <Filter className="h-5 w-5 text-blue-700" />
-              <select
-                value={category}
-                onChange={(event) => setCategory(event.target.value)}
-                className="w-full bg-transparent font-semibold text-slate-950 outline-none"
-              >
+              <select value={category} onChange={(event) => setCategory(event.target.value)} className="w-full bg-transparent font-semibold text-slate-950 outline-none">
                 {categories.map((item) => (
                   <option key={item}>{item}</option>
                 ))}
@@ -1093,28 +1110,16 @@ function Directory() {
           {showAdvanced && (
             <div className="mt-3 grid gap-3 lg:grid-cols-2">
               <div className="rounded-2xl bg-white px-4 py-4 shadow-sm">
-                <label className="mb-2 block text-xs font-black uppercase tracking-[0.18em] text-slate-500">
-                  Commission type
-                </label>
-                <select
-                  value={commissionType}
-                  onChange={(event) => setCommissionType(event.target.value)}
-                  className="w-full bg-transparent font-semibold text-slate-950 outline-none"
-                >
+                <label className="mb-2 block text-xs font-black uppercase tracking-[0.18em] text-slate-500">Commission type</label>
+                <select value={commissionType} onChange={(event) => setCommissionType(event.target.value)} className="w-full bg-transparent font-semibold text-slate-950 outline-none">
                   {commissionTypes.map((item) => (
                     <option key={item}>{item}</option>
                   ))}
                 </select>
               </div>
               <div className="rounded-2xl bg-white px-4 py-4 shadow-sm">
-                <label className="mb-2 block text-xs font-black uppercase tracking-[0.18em] text-slate-500">
-                  Audience type
-                </label>
-                <select
-                  value={audienceType}
-                  onChange={(event) => setAudienceType(event.target.value)}
-                  className="w-full bg-transparent font-semibold text-slate-950 outline-none"
-                >
+                <label className="mb-2 block text-xs font-black uppercase tracking-[0.18em] text-slate-500">Audience type</label>
+                <select value={audienceType} onChange={(event) => setAudienceType(event.target.value)} className="w-full bg-transparent font-semibold text-slate-950 outline-none">
                   {audienceTypes.map((item) => (
                     <option key={item}>{item}</option>
                   ))}
@@ -1126,9 +1131,9 @@ function Directory() {
 
         <div className="mt-5 flex flex-col justify-between gap-3 text-sm font-semibold text-slate-600 sm:flex-row sm:items-center">
           <p>
-            Showing <span className="font-black text-slate-950">{filteredPrograms.length}</span> of {programs.length} import-ready programs.
+            Showing <span className="font-black text-slate-950">{filteredPrograms.length}</span> public listings, including <span className="font-black text-slate-950">{memberPreviewCount}</span> member previews.
           </p>
-          <p>Tip: Start with a niche, then refine by commission type, audience fit, or product category.</p>
+          <p>Basic cards are free to browse. Member previews point toward the premium membership experience.</p>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -1140,41 +1145,35 @@ function Directory() {
     </section>
   );
 }
+
 function Pricing() {
   return (
-    <section id="pricing" className="bg-gradient-to-br from-[#071A3D] via-blue-950 to-[#071A3D] py-20 text-white">
+    <section id="pricing" className="bg-gradient-to-br from-[#020617] via-[#071A3D] to-[#111827] py-20 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
-          <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-300">
-            Membership paths
-          </p>
+          <p className="text-sm font-black uppercase tracking-[0.25em] text-red-300">AvaraPath Membership</p>
           <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-            Start free. Upgrade when better discovery matters.
+            Free discovery to start. Premium opportunity intelligence when you are ready.
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-300">
-            AvaraPath is being built around a free public directory plus simple paid directory paths
-            for people who want stronger affiliate discovery, premium program notes, and better
-            access to higher-value opportunities.
+            AvaraPath is moving away from a static paid list. The goal is a membership built around ongoing opportunity drops, higher-value program discovery, niche-specific paths, program updates, and strategy-focused notes.
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-300">
-              Free
-            </p>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-300">Free</p>
             <h3 className="mt-3 text-2xl font-black">Free Directory</h3>
             <p className="mt-3 text-4xl font-black">$0</p>
-            <p className="mt-3 text-slate-300">
-              For exploring public affiliate programs and getting familiar with the directory.
-            </p>
+            <p className="mt-3 text-slate-300">For anyone who wants to explore public affiliate opportunities and learn how AvaraPath works.</p>
             <ul className="mt-6 space-y-3">
               {[
-                "Public affiliate directory",
+                "Public affiliate directory access",
                 "Basic search and filters",
-                "Basic program cards",
-                "General commission, cookie, and platform notes",
-                "Join waitlist or submit a program",
+                "Mostly lower-commission and beginner-friendly examples",
+                "Occasional member previews",
+                "Basic commission, cookie, and platform notes",
+                "Free updates and program submission form",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-slate-200">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-300" />
@@ -1182,74 +1181,51 @@ function Pricing() {
                 </li>
               ))}
             </ul>
+            <a href={TALLY_FORM_URL} className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/20 px-5 py-4 font-extrabold text-white transition hover:bg-white/10">
+              Get free updates
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
 
-          <div className="relative overflow-hidden rounded-[2rem] border-2 border-slate-300 bg-gradient-to-br from-white via-slate-100 to-slate-300 p-8 text-[#071A3D] shadow-2xl shadow-slate-400/30">
-            <div className="absolute -right-20 -top-20 h-44 w-44 rounded-full bg-white/50 blur-2xl" />
-            <div className="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-slate-400 via-white to-slate-500" />
+          <div className="relative overflow-hidden rounded-[2rem] border-2 border-red-500/60 bg-gradient-to-br from-[#020617] via-[#071A3D] to-[#111827] p-8 shadow-2xl shadow-red-950/20">
+            <img src={BRAND.iconLogo} alt="" aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 opacity-[0.08]" />
+            <div className="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-red-600 via-blue-500 to-red-500" />
+            <p className="relative text-sm font-black uppercase tracking-[0.2em] text-red-300">Paid membership</p>
+            <h3 className="relative mt-3 text-3xl font-black">AvaraPath Membership</h3>
+            <p className="relative mt-3 text-5xl font-black">$49/mo</p>
+            <p className="relative mt-3 max-w-2xl text-slate-300">
+              For creators, publishers, side hustlers, agencies, and small businesses who want ongoing affiliate opportunity discovery instead of a one-time list.
+            </p>
 
-            <p className="relative text-sm font-black uppercase tracking-[0.2em] text-slate-600">
-              Silver
-            </p>
-            <h3 className="relative mt-3 text-2xl font-black">Plus Directory</h3>
-            <p className="relative mt-3 text-4xl font-black">$9/mo</p>
-            <p className="relative mt-3 text-slate-700">
-              For creators, publishers, side hustlers, and small businesses who want better affiliate
-              discovery than the free directory.
-            </p>
-            <ul className="relative mt-6 space-y-3">
+            <div className="relative mt-6 grid gap-3 sm:grid-cols-2">
               {[
-                "Premium affiliate opportunity lists",
-                "High-commission program discovery",
-                "Recurring commission program discovery",
-                "High-ticket program discovery",
-                "Premium reason notes",
-                "New program drops",
+                "Premium opportunity drops",
+                "Higher-commission programs",
+                "Recurring commission programs",
+                "High-ticket opportunities",
+                "Niche-specific affiliate paths",
+                "Best-fit program recommendations",
+                "Program priority notes",
+                "Promotion angle notes",
+                "Caution and compliance notes",
+                "Member research request consideration",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-slate-700">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-slate-600" />
-                  {item}
-                </li>
+                <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-slate-200">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-red-300" />
+                  <span className="text-sm font-semibold leading-6">{item}</span>
+                </div>
               ))}
-            </ul>
-          </div>
+            </div>
 
-          <div className="relative overflow-hidden rounded-[2rem] border-2 border-yellow-400 bg-gradient-to-br from-white via-yellow-50 to-yellow-200 p-8 text-[#071A3D] shadow-2xl shadow-yellow-500/30">
-            <div className="absolute -right-20 -top-20 h-44 w-44 rounded-full bg-yellow-300/50 blur-2xl" />
-            <div className="absolute bottom-0 left-0 h-1.5 w-full bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-600" />
-
-            <p className="relative text-sm font-black uppercase tracking-[0.2em] text-yellow-700">
-              Gold
+            <a href={TALLY_FORM_URL} className="relative mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 to-blue-700 px-5 py-4 font-extrabold text-white shadow-md shadow-red-950/20 transition hover:shadow-lg">
+              Join membership waitlist
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <p className="relative mt-5 text-sm leading-6 text-slate-400">
+              Payment links are prepared but not public yet. AvaraPath does not guarantee affiliate approval, earnings, commissions, or business results.
             </p>
-            <h3 className="relative mt-3 text-2xl font-black">Full Directory</h3>
-            <p className="relative mt-3 text-4xl font-black">$29/mo</p>
-            <p className="relative mt-3 text-slate-700">
-              For members who want broader premium access, stronger discovery tools, and priority
-              consideration as AvaraPath grows.
-            </p>
-            <ul className="relative mt-6 space-y-3">
-              {[
-                "Everything in Plus Directory",
-                "Full premium directory access",
-                "Early access to new features",
-                "Priority niche/program request consideration",
-                "Priority review for submitted programs",
-                "Member spotlight consideration",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-slate-700">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-yellow-600" />
-                  {item}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
-
-        <p className="mt-8 max-w-4xl text-sm leading-6 text-slate-300">
-          Paid membership details are being prepared for launch. AvaraPath does not guarantee
-          affiliate approval, earnings, commissions, or business results. Members should always
-          review each program’s official terms before applying or promoting.
-        </p>
       </div>
     </section>
   );
@@ -1262,11 +1238,9 @@ function SubmitProgram() {
         <div className="grid gap-8 rounded-[2.5rem] border border-slate-950 bg-gradient-to-br from-white to-blue-50 p-8 lg:grid-cols-[1fr_0.8fr] lg:p-12">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">For brands and programs</p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950">
-              Want your affiliate program listed?
-            </h2>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950">Want your affiliate program reviewed?</h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700">
-              AvaraPath is building a cleaner way for creators and businesses to discover affiliate connections. Brands and affiliate managers will eventually be able to submit programs for review.
+              AvaraPath is building a cleaner way for creators and businesses to discover affiliate connections. Brands and affiliate managers can submit programs for future review and listing consideration.
             </p>
           </div>
           <div className="rounded-[2rem] bg-white p-6 shadow-xl shadow-blue-950/10">
@@ -1274,14 +1248,9 @@ function SubmitProgram() {
               <ShieldCheck className="h-8 w-8 text-blue-700" />
               <h3 className="text-xl font-black text-slate-950">Review-based listing</h3>
             </div>
-            <p className="mt-4 leading-7 text-slate-700">
-              Programs should have clear application links, commission details, and rules before being marked fully public-ready.
-            </p>
-            <a
-              href="https://tally.so/r/rjkN1p"
-              className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 font-extrabold text-white transition hover:bg-blue-700"
-            >
-              Join launch updates
+            <p className="mt-4 leading-7 text-slate-700">Programs should have clear application links, commission details, restrictions, and rules before being treated as public-ready.</p>
+            <a href={TALLY_FORM_URL} className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-slate-950 px-5 py-4 font-extrabold text-white transition hover:bg-blue-700">
+              Submit or contact AvaraPath
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -1297,29 +1266,24 @@ function Waitlist() {
       <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
         <img src={BRAND.simpleLogo} alt="AvaraPath" className="mx-auto mb-8 h-28 w-auto object-contain" />
         <p className="text-sm font-black uppercase tracking-[0.25em] text-blue-700">Early access</p>
-        <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
-          Get early AvaraPath updates.
-        </h2>
+        <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">Get AvaraPath updates.</h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-700">
-          Follow the build as the affiliate directory grows from curated data into a full discovery platform for affiliate connections.
+          Follow the build as AvaraPath grows from a public directory into a membership built around affiliate opportunity discovery, niche-specific paths, and ongoing program intelligence.
         </p>
         <div className="mx-auto mt-8 flex max-w-2xl flex-col gap-3 rounded-[2rem] border border-slate-950 bg-white p-3 shadow-xl sm:flex-row">
           <div className="flex flex-1 items-center gap-3 rounded-2xl bg-slate-50 px-4 py-4">
             <Mail className="h-5 w-5 text-blue-700" />
             <input className="w-full bg-transparent outline-none" placeholder="Enter your email" />
           </div>
-          <a
-  href="https://tally.so/r/rjkN1p"
-  className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-6 py-4 text-center font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg"
->
-  Join waitlist
-</a>
+          <a href={TALLY_FORM_URL} className="rounded-2xl bg-gradient-to-r from-[#071A3D] to-[#0B63F6] px-6 py-4 text-center font-extrabold text-white shadow-md shadow-blue-950/10 transition hover:shadow-lg">
+            Join update list
+          </a>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {[
-            ["New programs", "Get updates as better affiliate opportunities are added."],
-            ["Better scouting", "Follow improvements to filters, categories, and program notes."],
-            ["Early access", "Be first in line as AvaraPath Pro takes shape."],
+            ["New opportunities", "Get updates as better affiliate opportunities are added or reviewed."],
+            ["Membership build", "Follow new premium features, niche paths, and program intelligence."],
+            ["Early access", "Be first in line as AvaraPath Membership takes shape."],
           ].map(([title, text]) => (
             <div key={title} className="rounded-3xl bg-white p-5 text-left shadow-sm">
               <h3 className="font-black text-slate-950">{title}</h3>
@@ -1334,18 +1298,10 @@ function Waitlist() {
 
 function FAQ() {
   const questions = [
-    [
-      "Is AvaraPath an affiliate network?",
-      "No. The current MVP is a directory and discovery tool. Users apply directly through the affiliate or partner program pages.",
-    ],
-    [
-      "Are all programs fully verified?",
-      "The database currently separates link-verified, partially verified, and future fully verified rows. The site should be treated as discovery, not legal or financial advice.",
-    ],
-    [
-      "What will paid members get?",
-      "The planned paid value is premium discovery intelligence: higher-commission programs, recurring programs, better filters, comparison notes, and member visibility opportunities.",
-    ],
+    ["Is AvaraPath an affiliate network?", "No. AvaraPath is a discovery and research directory. Users apply directly through the affiliate or partner program pages."],
+    ["What is free?", "The free directory gives visitors a public starting point with basic affiliate opportunities, filters, and occasional member previews."],
+    ["What will paid members get?", "AvaraPath Membership is being shaped around ongoing opportunity discovery: premium drops, higher-commission and recurring programs, niche-specific paths, strategy notes, caution notes, and member request consideration."],
+    ["Are results guaranteed?", "No. AvaraPath does not guarantee affiliate approval, earnings, commissions, traffic, sales, or business results. Always review official program terms before applying or promoting."],
   ];
 
   return (
@@ -1368,21 +1324,15 @@ function FAQ() {
   );
 }
 
-
 function LegalSections() {
   return (
     <section id="legal" className="bg-white py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10">
-          <p className="text-sm font-extrabold uppercase tracking-[0.25em] text-blue-700">
-            Trust & transparency
-          </p>
-          <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#071A3D] sm:text-5xl">
-            Basic policies for early access.
-          </h2>
+          <p className="text-sm font-extrabold uppercase tracking-[0.25em] text-blue-700">Trust & transparency</p>
+          <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#071A3D] sm:text-5xl">Basic policies for early access.</h2>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">
-            These MVP policies explain how AvaraPath handles early access inquiries,
-            affiliate program information, and directory content while the platform is still being built.
+            These MVP policies explain how AvaraPath handles early access inquiries, affiliate program information, and directory content while the platform is still being built.
           </p>
         </div>
 
@@ -1390,70 +1340,32 @@ function LegalSections() {
           <div id="privacy" className="rounded-3xl border border-blue-100 bg-slate-50 p-8">
             <h3 className="text-2xl font-extrabold text-[#071A3D]">Privacy Policy</h3>
             <div className="mt-4 space-y-4 leading-7 text-slate-700">
+              <p>AvaraPath may collect information submitted through early access and inquiry forms, including your name, email address, website or social link, inquiry type, and message.</p>
+              <p>This information is used to respond to inquiries, manage early access interest, review affiliate program submissions, improve the directory, and understand what visitors are looking for.</p>
+              <p>AvaraPath does not sell personal information. Form submissions may be processed through third-party tools such as Tally, and the website may be hosted or delivered through third-party services such as Vercel.</p>
               <p>
-                AvaraPath may collect information submitted through early access and inquiry forms,
-                including your name, email address, website or social link, inquiry type, and message.
+                If you submit information and later want it removed, you may request removal by contacting AvaraPath at{" "}
+                <a href="mailto:contact@avarapath.com" className="font-bold text-blue-700 hover:underline">contact@avarapath.com</a>.
               </p>
-              <p>
-                This information is used to respond to inquiries, manage early access interest, review
-                affiliate program submissions, improve the directory, and understand what visitors are
-                looking for.
-              </p>
-              <p>
-                AvaraPath does not sell personal information. Form submissions may be processed through
-                third-party tools such as Tally, and the website may be hosted or delivered through
-                third-party services such as Vercel.
-              </p>
-              <p>
-  If you submit information and later want it removed, you may request removal by contacting
-  AvaraPath at{" "}
-  <a href="mailto:contact@avarapath.com" className="font-bold text-blue-700 hover:underline">
-    contact@avarapath.com
-  </a>
-  .
-</p>
             </div>
           </div>
 
           <div id="terms" className="rounded-3xl border border-blue-100 bg-slate-50 p-8">
             <h3 className="text-2xl font-extrabold text-[#071A3D]">Terms / Disclaimer</h3>
             <div className="mt-4 space-y-4 leading-7 text-slate-700">
-              <p>
-                AvaraPath is an affiliate program discovery directory. The information shown on this site
-                is provided for research and discovery purposes only.
-              </p>
-              <p>
-                Affiliate program details, commission rates, cookie windows, approval requirements,
-                restrictions, and availability can change at any time. Visitors should always review each
-                program’s official terms before applying, promoting, or relying on any information.
-              </p>
-              <p>
-                AvaraPath does not guarantee affiliate approval, earnings, commissions, traffic, sales,
-                program availability, or business results.
-              </p>
-              <p>
-                Nothing on this site should be treated as financial, legal, tax, or business advice.
-              </p>
+              <p>AvaraPath is an affiliate program discovery directory. The information shown on this site is provided for research and discovery purposes only.</p>
+              <p>Affiliate program details, commission rates, cookie windows, approval requirements, restrictions, and availability can change at any time. Visitors should always review each program’s official terms before applying, promoting, or relying on any information.</p>
+              <p>AvaraPath does not guarantee affiliate approval, earnings, commissions, traffic, sales, program availability, or business results.</p>
+              <p>Nothing on this site should be treated as financial, legal, tax, or business advice.</p>
             </div>
           </div>
 
           <div id="affiliate-disclosure" className="rounded-3xl border border-blue-100 bg-slate-50 p-8">
             <h3 className="text-2xl font-extrabold text-[#071A3D]">Affiliate Disclosure</h3>
             <div className="mt-4 space-y-4 leading-7 text-slate-700">
-              <p>
-                AvaraPath may eventually earn referral fees, affiliate commissions, sponsorship revenue,
-                paid placement fees, or other compensation from some programs, brands, or partners listed
-                or discussed on the site.
-              </p>
-              <p>
-                Listings may include affiliate or partner relationships in the future. The goal of the
-                directory is to organize useful affiliate program information and help visitors discover
-                opportunities that may fit their audience.
-              </p>
-              <p>
-                Visitors should always review official program pages and terms before joining or promoting
-                any affiliate program.
-              </p>
+              <p>AvaraPath may eventually earn referral fees, affiliate commissions, sponsorship revenue, paid placement fees, or other compensation from some programs, brands, or partners listed or discussed on the site.</p>
+              <p>Listings may include affiliate or partner relationships in the future. The goal of the directory is to organize useful affiliate program information and help visitors discover opportunities that may fit their audience.</p>
+              <p>Visitors should always review official program pages and terms before joining or promoting any affiliate program.</p>
             </div>
           </div>
         </div>
@@ -1471,9 +1383,7 @@ function TrustNote() {
         </div>
         <div>
           <h2 className="text-2xl font-black">Trust note</h2>
-          <p className="mt-2 max-w-4xl leading-7 text-slate-300">
-            AvaraPath is being built as a discovery directory. Commission details, cookie windows, restrictions, and eligibility can change. Always review each program’s official terms before applying or promoting.
-          </p>
+          <p className="mt-2 max-w-4xl leading-7 text-slate-300">AvaraPath is being built as a discovery directory and membership concept. Commission details, cookie windows, restrictions, and eligibility can change. Always review each program’s official terms before applying or promoting.</p>
         </div>
       </div>
     </section>
@@ -1489,17 +1399,13 @@ function Footer() {
           <div>
             <p className="text-xl font-black text-slate-950">{BRAND.name}</p>
             <p className="text-sm font-semibold text-slate-600">{BRAND.slogan}</p>
-            <a
-  href="mailto:contact@avarapath.com"
-  className="mt-1 block text-sm font-semibold text-blue-700 hover:underline"
->
-  contact@avarapath.com
-</a>
+            <a href="mailto:contact@avarapath.com" className="mt-1 block text-sm font-semibold text-blue-700 hover:underline">contact@avarapath.com</a>
           </div>
         </div>
         <div className="flex flex-wrap gap-5 text-sm font-bold text-slate-600">
           <a href="#how-it-works" className="hover:text-blue-700">How it works</a>
           <a href="#directory" className="hover:text-blue-700">Directory</a>
+          <a href="#pricing" className="hover:text-blue-700">Membership</a>
           <a href="#privacy" className="hover:text-blue-700">Privacy</a>
           <a href="#terms" className="hover:text-blue-700">Terms</a>
           <a href="#affiliate-disclosure" className="hover:text-blue-700">Affiliate Disclosure</a>
