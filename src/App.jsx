@@ -29,6 +29,7 @@ const BRAND = {
 };
 
 const TALLY_FORM_URL = "https://tally.so/r/rjkN1p";
+const MEMBERSHIP_PAYMENT_URL = "https://buy.stripe.com/fZu28q928cEQgu50Ik73G02";
 
 const programs = [
   {
@@ -714,10 +715,10 @@ function Hero() {
 
         <div className="relative z-10 flex items-center justify-center">
           <a
-            href={TALLY_FORM_URL}
+            href={MEMBERSHIP_PAYMENT_URL}
             target="_blank"
             rel="noreferrer"
-            aria-label="Join the AvaraPath Membership waitlist"
+            aria-label="Join AvaraPath Membership"
             className="group relative block w-full max-w-xl overflow-hidden rounded-[2rem] border border-red-500/30 bg-gradient-to-br from-[#020617] via-[#071A3D] to-[#111827] p-6 text-white shadow-2xl shadow-blue-950/30 transition hover:-translate-y-1 hover:border-red-400/60 hover:shadow-red-950/20 focus:outline-none focus:ring-4 focus:ring-red-300/40"
           >
             <img
@@ -755,7 +756,7 @@ function Hero() {
               ))}
             </div>
             <div className="relative mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-red-200">
-              Join the membership waitlist
+              Join AvaraPath Membership
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </div>
           </a>
@@ -817,7 +818,7 @@ function HowItWorks() {
   const steps = [
     ["01", "Search free opportunities", "Anyone can use the public directory to explore basic affiliate programs by niche, category, and audience fit."],
     ["02", "Notice member previews", "A few stronger examples show the kind of higher-value opportunities members can discover more consistently."],
-    ["03", "Join for premium access", "Membership is built around opportunity drops, niche-specific paths, program updates, and strategy notes."],
+    ["03", "Join membership access", "Membership is built around opportunity drops, niche-specific paths, program updates, and strategy notes."],
     ["04", "Apply with better direction", "Use recommendations, caution notes, and promotion angles to decide which programs to pursue first."],
   ];
 
@@ -930,7 +931,7 @@ function ProgramCard({ program }) {
 
   if (isMemberPreview) {
     return (
-      <a href={TALLY_FORM_URL} target="_blank" rel="noreferrer" className="block h-full" aria-label={`Join AvaraPath Membership to view more opportunities like ${program.name}`}>
+      <a href={MEMBERSHIP_PAYMENT_URL} target="_blank" rel="noreferrer" className="block h-full" aria-label={`Join AvaraPath Membership to view more opportunities like ${program.name}`}>
         {body}
       </a>
     );
@@ -1132,12 +1133,12 @@ function Pricing() {
               ))}
             </div>
 
-            <a href={TALLY_FORM_URL} className="relative mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 to-blue-700 px-5 py-4 font-extrabold text-white shadow-md shadow-red-950/20 transition hover:shadow-lg">
-              Join membership waitlist
+            <a href={MEMBERSHIP_PAYMENT_URL} target="_blank" rel="noreferrer" className="relative mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 to-blue-700 px-5 py-4 font-extrabold text-white shadow-md shadow-red-950/20 transition hover:shadow-lg">
+              Join AvaraPath Membership
               <ArrowRight className="h-4 w-4" />
             </a>
             <p className="relative mt-5 text-sm leading-6 text-slate-400">
-              Payment links are prepared but not public yet. AvaraPath does not guarantee affiliate approval, earnings, commissions, or business results.
+              $49/month. Cancel anytime through Stripe. AvaraPath does not guarantee affiliate approval, earnings, commissions, or business results.
             </p>
           </div>
         </div>
@@ -1198,7 +1199,7 @@ function Waitlist() {
           {[
             ["New opportunities", "Get updates as better affiliate opportunities are added or reviewed."],
             ["Membership build", "Follow new premium features, niche paths, and program intelligence."],
-            ["Early access", "Be first in line as AvaraPath Membership takes shape."],
+            ["Early access", "See new premium features, niche paths, and member updates as they are added."],
           ].map(([title, text]) => (
             <div key={title} className="rounded-3xl bg-white p-5 text-left shadow-sm">
               <h3 className="font-black text-slate-950">{title}</h3>
@@ -1215,7 +1216,7 @@ function FAQ() {
   const questions = [
     ["Is AvaraPath an affiliate network?", "No. AvaraPath is a discovery and research directory. Users apply directly through the affiliate or partner program pages."],
     ["What is free?", "The free directory gives visitors a public starting point with basic affiliate opportunities, filters, and occasional member previews."],
-    ["What will paid members get?", "AvaraPath Membership is being shaped around ongoing opportunity discovery: premium drops, higher-commission and recurring programs, niche-specific paths, strategy notes, caution notes, and member request consideration."],
+    ["What does membership include?", "AvaraPath Membership includes ongoing opportunity discovery: premium drops, higher-commission and recurring programs, niche-specific paths, strategy notes, caution notes, and member request consideration."],
     ["Are results guaranteed?", "No. AvaraPath does not guarantee affiliate approval, earnings, commissions, traffic, sales, or business results. Always review official program terms before applying or promoting."],
   ];
 
