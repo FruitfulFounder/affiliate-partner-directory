@@ -1,42 +1,44 @@
 # AvaraPath project blueprint
 
-## Direction
-AvaraPath: Your Business. Built Smarter. Custom websites and practical digital systems for small businesses locally and nationwide. One-time development and optional recurring care are separate offerings. No affiliate membership, fixed unapproved pricing, payment activation, fabricated clients, or testimonials.
-
-## Source and preservation status
-Integrated into the existing FruitfulFounder/affiliate-partner-directory checkout. Original main d45846c20d22c574c24e67ccd1036fe5e290947e is preserved in local backup/production-before-digital-solutions-2026-11-16. Changes live only on local dev/digital-solutions. Neither branch has been pushed because Vercel may automatically deploy branch events. Main and origin remain unchanged.
-
-All four original PNG logos remain unchanged in public/images/brand. The original header logo and icon are used. Historical affiliate code/data are recoverable in the backup branch; old public membership marketing and checkout code are removed from the development App. Original favicon and historical assets remain stored, while the page references the branded PNG icon.
+## Direction and identity
+AvaraPath — Your Business. Built Smarter. Practical websites and digital solutions for small businesses locally and nationwide. One-time development and optional ongoing care remain separate. No affiliate membership or recurring billing platform. The approved navy/blue identity, original logos, hero, services, four-step process, benefits, support, FAQ and footer remain the foundation.
 
 ## Architecture
-Retains React 19, Vite 8, Tailwind 4 and existing dependency versions/lockfile. src/config.mjs separates content and branding; src/render.mjs provides reusable HTML sections mounted through the React App host. This adapter intentionally retains the original generated section renderer instead of duplicating the page as JSX. Only trusted source configuration is rendered; visitor input never becomes HTML. Native disclosures and inquiry behavior use src/interactions.mjs with AbortController cleanup for React StrictMode and unmounts. src/App.css contains responsive styling. Existing main.jsx and vite.config.js are unchanged. No new dependencies are added.
+The original React 19/Vite 8/Tailwind 4 stack and dependency lockfile are retained. The React App hosts a shared escaped HTML renderer and installs native interactions with AbortController cleanup for StrictMode/unmounts. Content and feature settings are in src/config.mjs. Trusted source content is rendered; never accept customer-generated HTML as configuration. Node-only provider code stays outside the browser bundle.
 
-Editorial/compact layouts and inline/stacked navigation are starting variants. Sections can be reordered/omitted; update linked navigation and CTA targets when removing a section. Brand typography accepts a CSS font stack. Future client work should expand the renderer or introduce React sections where stateful behavior warrants it, while keeping content separate.
+Modules:
+- HTML utilities and URL guards: src/html.mjs.
+- Main composition: src/render.mjs. Optional sections are configured in `sections`; update navigation, assistant actions and internal CTA targets when removing a linked section.
+- Pricing, booking, form, assistant shell: src/features.mjs.
+- Native browser interactions: src/interactions.mjs; delivery UI: src/contact-client.mjs.
+- Rule-based FAQ assistant: src/assistant.mjs. Appearance/intro/questions are configurable; prices and booking information share the central config.
+- Demo content/themes: src/demos.mjs. Query routes render full fictional business websites with separate scoped themes and shared local-only form behavior.
+- API: api/contact.js and integrations/node-contact.mjs adapt Node/Vercel requests to the provider chain. Local Vite middleware uses the same adapter.
+- Provider chain: integrations/providers.mjs wraps shared validation with Resend, Turnstile and atomic Upstash rate limiting. Server credentials never enter client config. See INTEGRATIONS_SETUP.md.
+- payments, automation and dashboard contracts remain disabled/integration-ready; no money is processed and no customer dashboard is claimed functional.
 
-## Services
-Website and digital experiences: business websites, landing pages, lead collection.
-Automation and customer experience: scheduling, approved-knowledge chatbots, workflow automation, follow-ups and review requests.
-Commerce and business tools: provider-hosted payments and e-commerce, dashboards, hosting and maintenance.
-Each service has an expandable explanation. Services are offered capabilities, not claims that this review site runs those integrations.
+## Services and provisional prices
+All editable in src/config.mjs: Landing Pages $199+, Business Websites $499+, Booking Setup $249+, AI Chatbot Setup $399+, Business Automation $399+, Maintenance Request a Quote, Custom Business Software Request a Quote. The user approved these provisional starting prices for Batch 2. Final price depends on client requirements; no checkout is introduced.
 
-## Modules and activation
-- Contact: default download-only, no persistence or network request. Setting `integrations.contact.endpoint` to HTTPS enables POST submission. Use a server handler based on `integrations/contact.mjs`, with explicit origin, durable rate limiter, server spam verification, and delivery adapter. Validate destinations server-side. Verify provider acceptance and test failures before launch. A honeypot alone is insufficient for public production. Wire provider spam tokens in the UI when using a challenge provider. Consent and privacy copy must match the final provider, retention period, and deletion contact.
-- Booking: a configured HTTPS URL replaces the consultation request CTA with an external scheduling link. Use a business-owned Calendly, Cal.com, or equivalent account. Verify timezone, availability, notifications, cancellation and rescheduling flows.
-- Chat: adapter descriptor only, disabled. Select provider; add approved knowledge, escalation and privacy rules; implement consent-aware UI and test. No widget is embedded by this version.
-- Payments: descriptor only, disabled. Pattern allows Stripe-hosted `buy.stripe.com` checkout; do not activate payment links without separate authorization. No card processing, checkout, subscription or payments exist here.
-- Automation: versioned `lead.received` event contract only. Choose Zapier, Make, or equivalent; configure authenticated server-to-server webhook with secret, retry policy, idempotency, and consent controls. Never expose webhook credentials in client config.
-- Dashboard: architectural extension contract only. Requires authenticated server routes and per-customer authorization; never treat client configuration as access control.
+Additional offered services include customer follow-ups and review automation, provider-hosted payments/e-commerce, dashboards, lead collection, hosting and support. Availability is scoped per customer; the site does not claim these optional systems are all active on AvaraPath.
 
-## New customer workflow
-1. Run `node scripts/new-client.mjs /absolute/unused/client-directory "Business Name"`. The generator refuses existing destinations and copies source without Git state, dist, secrets, runtime data or project identity. It creates CLIENT_START.md; it does not pretend the resulting copy is a finished client site.
-2. Write a customer design brief: audience, primary action, tone, photography, typography, composition, and industry requirements. Standardize technology, not appearance.
-3. Replace brand, service content, examples, title/description, footer, favicon and AvaraPath logos. Edit template metadata as well as config. Supply business-owned assets. Recompose sections and create a visually distinct layout rather than only recoloring AvaraPath.
-4. Choose and implement required modules. Keep others disabled. Use customer-owned provider accounts and server-only credentials.
-5. Run tests/build and manually verify mobile, desktop, keyboard navigation, reduced motion, actual submissions, accessibility and provider failure paths.
-6. Initialize the customer's independent repository, document ownership and hosting, and deploy only with authorization.
+## Working versus external setup
+The local FAQ guide, prices, navigation, quote intent selection and full fictional demos work without accounts. Demo forms are explicitly non-sending and do not reserve appointments.
 
-## Design standards
-Navy/blue identity, editorial type hierarchy, generous whitespace, useful visual concepts, clear CTAs, readable copy, visible keyboard focus, native disclosure elements and reduced-motion support. Two concept previews are explicitly illustrative and are not customer work. No invented results or testimonials.
+Inquiry delivery is implemented, not yet externally configured or verified. The API checks configuration and fails closed. No download substitute or false submission confirmation remains. An honest email link is offered if unavailable; actual inbox delivery was not tested. Receiving email is configurable independently of Zoho; review the May 2027 expiry with the business owner.
 
-## Roadmap and launch blockers
-Original repository and logo integration is complete. Publish the backup/development branches only after automatic Vercel deployment behavior is controlled. Configure contact delivery and spam/rate controls; connect consultation scheduling; complete privacy notice and retention policy. Review actual rendered breakpoints and keyboard/screen reader behavior. Test configured providers end to end. Add approved real project examples when available. Expand chat, payment, automation and dashboard modules only for validated customer needs. Deployment authorization is still required.
+Booking is a reusable HTTPS link to a Cal.com/Calendly event with displayed duration and request fallback. Real availability, confirmations, rescheduling and cancellation require a configured provider event and end-to-end testing. No scheduling credentials were supplied.
+
+## Client generation
+Standardize the technology. Personalize the experience.
+1. Run `node scripts/new-client.mjs /absolute/unused/customer-directory "Business Name"`. It refuses existing paths and copies source/API/blank env template without real credentials, Git history, Vercel identity, runtime data or dist.
+2. Write a distinct brief: audience, goal, tone, photography, typography, hierarchy and composition. Do not just recolor AvaraPath. Use either fictional demo as a starting composition, then substantially tailor it.
+3. Replace company details, logo/favicon, pricing, metadata, approved FAQ rules, examples and content. Choose brand colors/fonts, layouts, sections and assistant behavior. Self-host licensed fonts if needed. Update AvaraPath-specific tests.
+4. Select optional features. Connect customer-owned form, booking and hosting accounts with server-only secrets. Do not share rate-limit keys, inboxes or secrets between customers. Review privacy and data retention.
+5. Run unit tests/build and browser checks at desktop/tablet/mobile. Verify real mail, challenge, rate limit, provider failures, booking timezone, confirmations and cancellation/rescheduling. Label any unconfigured state honestly.
+6. Create an independent customer repository and hosting linkage only with authorization; deploy through the customer's approved workflow.
+
+## Preservation and release
+Main d45846c20d22c574c24e67ccd1036fe5e290947e and local backup/production-before-digital-solutions-2026-11-16 preserve affiliate history. Original logos and assets remain unmodified. Batch 2 authorizes development branch pushes and automatic Vercel preview generation only. No merge into main, production deployment, DNS/domain change, payment activation or purchase is authorized.
+
+Launch work remaining: authorize/configure external provider accounts; verify actual delivery and scheduling; confirm Vercel settings and preview access; decide privacy retention; complete production SEO and indexing only when approved; then seek production release authorization. No invented testimonials or customer results.

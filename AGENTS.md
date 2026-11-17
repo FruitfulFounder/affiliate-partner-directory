@@ -13,4 +13,10 @@
 - Keep the review build noindex. Production indexing requires release preparation and an approved domain. Never deploy as a side effect of a test or build.
 
 - This repository uses React/Vite. Preserve the existing Vite plugins and lockfile; do not replace it with a separate static build project.
-- Branch pushes and PR creation may trigger Vercel deployments. Keep changes local until deployment triggers are controlled or authorized. Preserve main and backup branch.
+- Batch 2 authorizes pushing dev/digital-solutions and automatic Vercel preview generation. Preserve main and the backup branch; never merge or deploy production without separate authorization.
+
+- Batch 2 pricing is explicitly approved as provisional starting prices; keep it centralized in src/config.mjs. Do not add checkout or recurring billing.
+- Read INTEGRATIONS_SETUP.md for server setup. Inquiry success must follow actual provider acceptance. Keep Send disabled if delivery/spam controls are not configured. No fake confirmation or download substitute.
+- The FAQ guide is rule-based and must always identify itself as such. Never interpolate visitor questions as HTML.
+- Demo websites are fictional. Keep their local-only forms and appointment requests clearly labeled until a real customer implementation is configured and tested.
+- New customer scaffolding must include the API and blank environment example, never real .env or .vercel identity.

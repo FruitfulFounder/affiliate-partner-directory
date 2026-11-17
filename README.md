@@ -1,52 +1,44 @@
-# AvaraPath digital solutions — development integration
+# AvaraPath Digital Solutions — Batch 2
 
-This branch integrates the digital solutions redesign into the original `FruitfulFounder/affiliate-partner-directory` repository. It keeps React 19, Vite 8, Tailwind 4, the dependency lockfile, and the original brand assets. No production deployment is authorized.
+Existing repository: `FruitfulFounder/affiliate-partner-directory`. Development branch: `dev/digital-solutions`. Keeps React 19, Vite 8, Tailwind 4, the original four logo assets, and the approved blue/navy homepage design.
 
 ## Local review
-Requires Node compatible with Vite 8 (22.12+ or 24+).
+Requires Node 22.12+ or 24+.
 
 ```sh
 npm ci
 npm test
 npm run build
-npm run dev
-```
-
-The form downloads an inquiry file; it does not send messages. Booking falls back to inquiry preparation. Chat, payments, automation, and dashboards are contracts, not live integrations. No analytics code runs in the new App; the existing dependency remains unchanged.
-
-## Structure
-- `src/App.jsx`: React host for the shared renderer, with StrictMode-safe interaction setup/cleanup.
-- `src/config.mjs`: branding, service content, optional modules and composition.
-- `src/render.mjs`: escaped HTML section renderer. Only trusted repository configuration may reach this renderer; never inject user-generated HTML. React mounts its output and owns the host lifecycle; the section DOM is managed by the renderer and native controls.
-- `src/interactions.mjs`: inquiry validation/download, configured delivery, menu and consultation events.
-- `src/App.css`: responsive design and reduced-motion rules.
-- `integrations/`: guarded contact-handler factory and optional module contracts.
-- `public/images/brand/`: original unmodified logos. Header uses avarapath-header-logo.png; favicon uses avarapath-icon-only.png.
-- `scripts/new-client.mjs`: source scaffolding for a separate customer. See the blueprint for distinct branding and layouts.
-
-## Preservation and Vercel
-Original main: `d45846c20d22c574c24e67ccd1036fe5e290947e` (Launch AvaraPath membership checkout).
-Local backup: `backup/production-before-digital-solutions-2026-11-16` at that exact commit.
-Development: `dev/digital-solutions`.
-
-The original main commit has a successful `Vercel` GitHub status linking to project `fruitfulfounderhq/affiliate-partner-directory`. Repository homepage: https://affiliate-partner-directory.vercel.app. There is no tracked vercel.json or .vercel/project.json. Vite plugins are React and Tailwind; existing build is `vite build`, output defaults to dist. Actual Vercel dashboard build overrides, root directory, production branch, domain mappings, and environment variables have not been verified. No production credentials were accessed or changed.
-
-Branches remain local because pushing new branches/commits to the connected repository may automatically trigger Vercel deployments. Before publishing branches or opening a PR, confirm automatic deployments are disabled for them in Vercel. No push, merge or deploy has been performed. The backup preserves source history, not a snapshot of Vercel environment values or databases.
-
-## Release preparation — separate authorization required
-1. Review source/design and complete real-browser desktop/mobile/keyboard checks.
-2. Configure inquiry endpoint, server delivery/CRM provider, origin checks, durable rate limiting and server spam verification. The handler is an adapter, not an installed Vercel API route. Wire a real serverless route and challenge tokens as required by the provider; test success/failure end to end. Add provider-specific privacy, retention and deletion details.
-3. Connect a business-owned scheduler URL and verify availability/timezones/notifications. Other modules remain disabled until implemented and tested. Do not activate new payment links without authorization.
-4. Keep original assets, Vite configuration, hosting settings, DNS and environment values intact. Preview is noindex; production requires approved canonical/sitemap and indexing changes.
-5. After separate authorization, push branches with preview deployments suppressed, review, and merge via the existing release process. Never use a force push to main.
-
-## Viewing this development workspace
-The running local URL is http://localhost:5173 inside the cloud workspace. The preview forwarding relay is currently unavailable; that URL does not reach the cloud from your own computer. In this workspace terminal, start/restart the site with:
-
-```sh
-cd /workspace/work/affiliate-partner-directory
-git switch dev/digital-solutions
 npm run dev -- --host 0.0.0.0 --port 5173
 ```
 
-If the client provides a Ports/Preview panel, forward port 5173 and open it. Otherwise copy this development checkout to your computer, run npm ci and npm run dev there, and open the local URL Vite prints. The development branch is local only, so cloning GitHub alone will still show the old production site.
+Open the URL printed by Vite. The same development server serves `/api/contact`. Without integration credentials it returns `{ready:false,siteKey:null}`; the UI gives an honest unavailable state and email fallback. This cloud workspace's forwarding relay was previously unavailable, so its localhost URL may not open in a browser outside the workspace. Use the Vercel preview when available.
+
+## Working features
+- Centralized provisional USD pricing, service explanations and quote intent selection.
+- Rule-based floating FAQ guide with service advice, prices, booking and quote links. No paid AI or conversation storage.
+- Complete fictional demos at `/?demo=field-fern` and `/?demo=forma-studio`, with distinct compositions and locally validated demonstration forms.
+- Responsive navigation, FAQ disclosures, privacy details and accessible native form controls.
+- Server inquiry implementation, validation, Turnstile, durable rate limiting and provider-confirmed email delivery, tested with mocked providers. Actual external configuration and inbox tests remain required.
+- Reusable booking-provider interface with consultation inquiry fallback. A live provider account/event remains required.
+
+## Configuration and code
+- `src/config.mjs`: branding, contact email, pricing, assistant appearance/content, booking provider/duration, enabled sections and module flags.
+- `src/render.mjs`, `src/features.mjs`: reusable section rendering.
+- `src/html.mjs`: escaping, approved URL handling and shared icons. Rendered markup uses trusted repository config only; visitor text is never inserted as HTML.
+- `src/interactions.mjs`, `src/contact-client.mjs`, `src/assistant.mjs`: browser behavior with StrictMode cleanup.
+- `src/demos.mjs`: fictional theme/content compositions and complete demonstration pages.
+- `api/contact.js`, `integrations/`: actual Vercel API entry and reusable provider adapters.
+- `src/App.css`: approved main design plus scoped pricing, assistant and demo styles.
+- `INTEGRATIONS_SETUP.md`: provider accounts, server variables, local setup, privacy and verification steps.
+- `PROJECT_BLUEPRINT.md`, `AGENTS.md`: architecture and customer-generation rules.
+- `TEST_RESULTS.md`: performed checks and remaining limits.
+
+No checkout, recurring billing, payment activation, live AI, customer database or production deployment is part of this batch.
+
+## Source and deployment safety
+Original main: `d45846c20d22c574c24e67ccd1036fe5e290947e`, preserved in local `backup/production-before-digital-solutions-2026-11-16`. Affiliate-platform history remains recoverable; its checkout/marketing code is absent from the new public app. Do not merge into main or change DNS/domain/environment settings without authorization.
+
+The existing Vercel project is `fruitfulfounderhq/affiliate-partner-directory`; GitHub owner is `FruitfulFounder`. There is no tracked `vercel.json` or `.vercel/project.json`. `vite build` writes dist; Vercel's standard Vite preset serves the static app and the Node function in `api/`. Root-query demo URLs avoid dependence on custom route rewrites. Actual dashboard overrides and provider values are not visible in this workspace.
+
+Batch 2 explicitly authorizes pushing this development branch and allowing automatic Vercel previews. Production publishing is not authorized. Preview remains noindex. Once external providers are connected, verify actual mail and scheduling workflows before considering a production release. Final production SEO canonical/sitemap, indexing, business privacy retention decisions and approval remain release work.
