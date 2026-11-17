@@ -39,3 +39,14 @@ Branches remain local because pushing new branches/commits to the connected repo
 3. Connect a business-owned scheduler URL and verify availability/timezones/notifications. Other modules remain disabled until implemented and tested. Do not activate new payment links without authorization.
 4. Keep original assets, Vite configuration, hosting settings, DNS and environment values intact. Preview is noindex; production requires approved canonical/sitemap and indexing changes.
 5. After separate authorization, push branches with preview deployments suppressed, review, and merge via the existing release process. Never use a force push to main.
+
+## Viewing this development workspace
+The running local URL is http://localhost:5173 inside the cloud workspace. The preview forwarding relay is currently unavailable; that URL does not reach the cloud from your own computer. In this workspace terminal, start/restart the site with:
+
+```sh
+cd /workspace/work/affiliate-partner-directory
+git switch dev/digital-solutions
+npm run dev -- --host 0.0.0.0 --port 5173
+```
+
+If the client provides a Ports/Preview panel, forward port 5173 and open it. Otherwise copy this development checkout to your computer, run npm ci and npm run dev there, and open the local URL Vite prints. The development branch is local only, so cloning GitHub alone will still show the old production site.
